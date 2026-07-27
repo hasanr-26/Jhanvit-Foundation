@@ -67,14 +67,10 @@ export default function AnubhavvPage() {
       <Navbar />
 
       {/* Hero Banner */}
-      <section className="bg-gradient-to-r from-[#571000] via-[#801800] to-slate-900 text-white pt-32 pb-20 px-4 sm:px-6 relative overflow-hidden">
+      <section className="bg-[#007085] text-white pt-28 sm:pt-32 pb-16 px-4 sm:px-6 relative overflow-hidden border-b-4 border-[#005e70]">
         <div className="max-w-7xl mx-auto text-center space-y-4 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/20 border border-amber-400/30 text-amber-300 text-xs font-semibold">
-            <Sparkles className="w-4 h-4 text-amber-300" />
-            24x7 Dedicated Study Space in Pune
-          </div>
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">ANUBHAVV Abhyasika</h1>
-          <p className="max-w-2xl mx-auto text-slate-200 text-base">
+          <p className="max-w-2xl mx-auto text-cyan-50 text-base">
             Structured study hall for serious aspirants preparing for UPSC, MPSC, Banking & Govt examinations in Sadashiv Peth, Pune.
           </p>
         </div>
@@ -82,12 +78,12 @@ export default function AnubhavvPage() {
 
       {/* Operational Partnership & Entity Disclosure */}
       <section className="py-8 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-        <div className="bg-red-50 border border-red-200 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-4 text-slate-800">
-          <div className="w-12 h-12 rounded-xl bg-[#801800] text-white flex items-center justify-center flex-shrink-0">
+        <div className="bg-cyan-50 border border-cyan-200 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-4 text-slate-800">
+          <div className="w-12 h-12 rounded-xl bg-[#007085] text-white flex items-center justify-center flex-shrink-0">
             <Building className="w-6 h-6" />
           </div>
           <div className="space-y-1 text-sm">
-            <h4 className="font-bold text-[#801800]">Entity Operational Clarification</h4>
+            <h4 className="font-bold text-[#007085]">Entity Operational Clarification</h4>
             <p className="text-slate-700">
               <strong>ANUBHAVV Abhyasika</strong> is operated by <strong>ANUBHAVV Impact Labs</strong> (for-profit entity). Jhanvit Foundation (Section 8 NGO) provides mentorship, guidance & sponsorship programs. Seat fees are credited directly to ANUBHAVV Impact Labs account.
             </p>
@@ -104,7 +100,7 @@ export default function AnubhavvPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-red-50 text-[#801800] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-cyan-50 text-[#007085] flex items-center justify-center">
               <BookOpen className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-slate-900 text-lg">Individual Dedicated Desk</h3>
@@ -212,13 +208,12 @@ export default function AnubhavvPage() {
                   key={seatNum}
                   onClick={() => handleSeatClick(seatNum)}
                   disabled={isOccupied}
-                  className={`h-11 rounded-lg text-xs font-bold flex flex-col items-center justify-center transition-all ${
-                    isOccupied
+                  className={`h-11 rounded-lg text-xs font-bold flex flex-col items-center justify-center transition-all ${isOccupied
                       ? 'bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-200'
                       : isSelected
-                      ? 'bg-[#801800] text-white shadow-md scale-105 ring-2 ring-amber-400'
-                      : 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-sm hover:scale-105'
-                  }`}
+                        ? 'bg-[#801800] text-white shadow-md scale-105 ring-2 ring-amber-400'
+                        : 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-sm hover:scale-105'
+                    }`}
                 >
                   <span>S-{seatNum}</span>
                 </button>

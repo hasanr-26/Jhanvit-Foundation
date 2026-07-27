@@ -60,7 +60,7 @@ export default function HeroSlider() {
   };
 
   return (
-    <div className="relative w-full h-[640px] sm:h-[700px] lg:h-[760px] bg-slate-950 overflow-hidden pt-20">
+    <div className="relative w-full h-[580px] sm:h-[640px] lg:h-[700px] bg-slate-950 overflow-hidden pt-28 sm:pt-32 lg:pt-36">
       {/* Background Image Carousel with Overlay */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -78,30 +78,14 @@ export default function HeroSlider() {
             className="object-cover object-center brightness-[0.38] contrast-[1.05]"
             priority
           />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40" />
+          {/* Solid Dark Overlay */}
+          <div className="absolute inset-0 bg-slate-950/75" />
         </motion.div>
       </AnimatePresence>
 
       {/* Hero Content Overlay */}
-      <div className="relative z-10 max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col justify-center pb-12">
+      <div className="relative z-10 max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col justify-center pt-36 sm:pt-40 lg:pt-44 pb-16">
         <div className="max-w-3xl space-y-6">
-          {/* Tag / Badge */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`badge-${currentIndex}`}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0090b0]/30 border border-[#0090b0]/50 text-[#e6f7fa] text-xs font-semibold backdrop-blur-md"
-            >
-              <span className="w-2 h-2 rounded-full bg-[#f5b82e] animate-pulse" />
-              {slides[currentIndex].badge}
-            </motion.div>
-          </AnimatePresence>
-
           {/* Main Title */}
           <AnimatePresence mode="wait">
             <motion.h1
@@ -124,46 +108,11 @@ export default function HeroSlider() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -30, opacity: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal"
+              className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal max-w-2xl"
             >
               {slides[currentIndex].subtitle}
             </motion.p>
           </AnimatePresence>
-
-          {/* 3 MANDATORY CTA BUTTONS (Above the fold) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="pt-4 flex flex-wrap items-center gap-3.5"
-          >
-            {/* Button 1: Book Consultation */}
-            <Link
-              href="/consultation"
-              className="inline-flex items-center gap-2 bg-[#0090b0] hover:bg-[#00667e] text-white font-bold text-sm px-6 py-3.5 rounded-xl shadow-lg hover:shadow-cyan-500/25 transition-all transform hover:-translate-y-0.5"
-            >
-              <BookmarkCheck className="w-4 h-4 text-[#f5b82e]" />
-              Book a Consultation
-            </Link>
-
-            {/* Button 2: Book a Seat */}
-            <Link
-              href="/anubhavv"
-              className="inline-flex items-center gap-2 bg-[#801800] hover:bg-[#571000] text-white font-bold text-sm px-6 py-3.5 rounded-xl shadow-lg hover:shadow-red-900/30 transition-all transform hover:-translate-y-0.5 border border-red-700/50"
-            >
-              <Sparkles className="w-4 h-4 text-amber-300" />
-              Book a Study Seat
-            </Link>
-
-            {/* Button 3: Donate */}
-            <Link
-              href="/donate"
-              className="inline-flex items-center gap-2 bg-[#f5b82e] hover:bg-amber-400 text-[#0f172a] font-extrabold text-sm px-6 py-3.5 rounded-xl shadow-lg hover:shadow-amber-500/25 transition-all transform hover:-translate-y-0.5"
-            >
-              <HeartHandshake className="w-4 h-4 text-[#0f172a]" />
-              Donate
-            </Link>
-          </motion.div>
         </div>
       </div>
 
@@ -189,9 +138,8 @@ export default function HeroSlider() {
           <button
             key={idx}
             onClick={() => setCurrentIndex(idx)}
-            className={`h-2.5 rounded-full transition-all duration-300 ${
-              idx === currentIndex ? 'w-8 bg-[#0090b0]' : 'w-2.5 bg-white/40 hover:bg-white/80'
-            }`}
+            className={`h-2.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-[#0090b0]' : 'w-2.5 bg-white/40 hover:bg-white/80'
+              }`}
             aria-label={`Go to slide ${idx + 1}`}
           />
         ))}

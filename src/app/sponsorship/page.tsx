@@ -53,15 +53,11 @@ export default function SponsorshipPage() {
       <Navbar />
 
       {/* Hero Banner */}
-      <section className="bg-gradient-to-r from-amber-700 via-amber-600 to-slate-900 text-white pt-32 pb-20 px-4 sm:px-6">
+      <section className="bg-[#007085] text-white pt-28 sm:pt-32 pb-16 px-4 sm:px-6 border-b-4 border-[#005e70]">
         <div className="max-w-7xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#f5b82e] text-xs font-semibold">
-            <HeartHandshake className="w-4 h-4 text-[#f5b82e]" />
-            Student Sponsorship Initiative
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">Sponsored Study Seats</h1>
-          <p className="max-w-2xl mx-auto text-slate-100 text-base">
-            Study Without Worrying About Money — Jhanvit Foundation Funds Seats for Deserving Low-Income Aspirants.
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">Apply for Seat Sponsorship</h1>
+          <p className="max-w-2xl mx-auto text-cyan-50 text-base">
+            No hardworking aspirant should be deprived of a quiet study space due to financial constraints.
           </p>
         </div>
       </section>
@@ -130,7 +126,7 @@ export default function SponsorshipPage() {
                     placeholder="e.g. Pooja Deshmukh"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-[#007085] focus:outline-none"
                   />
                 </div>
                 <div>
@@ -141,7 +137,7 @@ export default function SponsorshipPage() {
                     placeholder="e.g. 23"
                     value={formData.age}
                     onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-[#007085] focus:outline-none"
                   />
                 </div>
               </div>
@@ -155,7 +151,7 @@ export default function SponsorshipPage() {
                     placeholder="e.g. 9876543210"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-[#007085] focus:outline-none"
                   />
                 </div>
                 <div>
@@ -166,7 +162,7 @@ export default function SponsorshipPage() {
                     placeholder="pooja@gmail.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-[#007085] focus:outline-none"
                   />
                 </div>
               </div>
@@ -177,7 +173,7 @@ export default function SponsorshipPage() {
                   <select
                     value={formData.exam}
                     onChange={(e) => setFormData({ ...formData, exam: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none bg-white"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-[#007085] focus:outline-none bg-white"
                   >
                     <option value="UPSC">UPSC Civil Services</option>
                     <option value="MPSC">MPSC Rajyaseva / Combined</option>
@@ -192,7 +188,7 @@ export default function SponsorshipPage() {
                   <select
                     value={formData.income}
                     onChange={(e) => setFormData({ ...formData, income: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none bg-white"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-[#007085] focus:outline-none bg-white"
                   >
                     <option value="Below ₹1.5 Lakhs">Below ₹1.5 Lakhs</option>
                     <option value="₹1.5 Lakhs - ₹3.0 Lakhs">₹1.5 Lakhs - ₹3.0 Lakhs</option>
@@ -208,7 +204,7 @@ export default function SponsorshipPage() {
                   placeholder="e.g. 1 year of self study in Pune"
                   value={formData.prepDuration}
                   onChange={(e) => setFormData({ ...formData, prepDuration: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-[#007085] focus:outline-none"
                 />
               </div>
 
@@ -220,7 +216,7 @@ export default function SponsorshipPage() {
                   placeholder="Describe your family background, financial constraints, and commitment to studies..."
                   value={formData.reason}
                   onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-[#007085] focus:outline-none"
                 ></textarea>
               </div>
 

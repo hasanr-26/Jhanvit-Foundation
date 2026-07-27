@@ -55,23 +55,19 @@ export default function DonatePage() {
       <Navbar />
 
       {/* Hero Banner */}
-      <section className="bg-gradient-to-r from-[#00667e] via-[#0090b0] to-emerald-950 text-white pt-32 pb-20 px-4 sm:px-6">
+      <section className="bg-[#007085] text-white pt-28 sm:pt-32 pb-16 px-4 sm:px-6 border-b-4 border-[#005e70]">
         <div className="max-w-7xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#f5b82e] text-xs font-semibold">
-            <HeartHandshake className="w-4 h-4 text-[#f5b82e]" />
-            Direct Impact Donation
-          </div>
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">Support an Aspirant</h1>
-          <p className="max-w-2xl mx-auto text-slate-200 text-base">
-            Your donation directly funds a study seat for a hardworking UPSC/MPSC aspirant who cannot afford one.
+          <p className="max-w-2xl mx-auto text-cyan-50 text-base">
+            Your contributions directly fund study hall seat access for dedicated UPSC and MPSC candidates from underprivileged backgrounds.
           </p>
         </div>
       </section>
 
       {/* Strict Payment Isolation Disclosure */}
       <section className="py-6 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-        <div className="bg-amber-500/10 border border-amber-300 rounded-2xl p-4 flex items-center gap-3 text-xs text-amber-900 font-medium">
-          <ShieldCheck className="w-5 h-5 text-amber-600 flex-shrink-0" />
+        <div className="bg-cyan-50 border border-cyan-200 rounded-2xl p-4 flex items-center gap-3 text-xs text-slate-800 font-medium">
+          <ShieldCheck className="w-5 h-5 text-[#007085] flex-shrink-0" />
           <span>
             <strong>Official Jhanvit Foundation Account Only:</strong> All donations go directly to Jhanvit Foundation (Section 8 Non-Profit, CIN: U85499PN2026NPL255094). Never transfer donation funds to ANUBHAVV accounts.
           </span>
@@ -107,7 +103,7 @@ export default function DonatePage() {
                 : 'bg-white border-slate-200 hover:border-slate-300'
             }`}
           >
-            <span className="absolute -top-3 right-4 bg-[#f5b82e] text-[#0f172a] text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
+            <span className="absolute -top-3 right-4 bg-[#007085] text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
               Most Popular
             </span>
             <div className="text-2xl font-extrabold text-[#0090b0]">₹2,000</div>
@@ -261,7 +257,7 @@ export default function DonatePage() {
                     'Connecting to Razorpay...'
                   ) : (
                     <>
-                      <CreditCard className="w-4 h-4 text-[#f5b82e]" /> Donate ₹{getFinalAmount().toLocaleString()} via Razorpay
+                      <CreditCard className="w-4 h-4 text-white" /> Donate ₹{getFinalAmount().toLocaleString()} via Razorpay
                     </>
                   )}
                 </button>
@@ -289,7 +285,7 @@ export default function DonatePage() {
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-slate-900 text-white rounded-3xl p-8 shadow-xl space-y-6 border border-slate-800">
               <div className="flex items-center gap-3 border-b border-slate-800 pb-4">
-                <Building className="w-6 h-6 text-[#f5b82e]" />
+                <Building className="w-6 h-6 text-[#0090b0]" />
                 <div>
                   <h4 className="font-bold text-lg text-white">Direct Bank Transfer</h4>
                   <p className="text-xs text-slate-400">Jhanvit Foundation Bank Details</p>
@@ -304,7 +300,7 @@ export default function DonatePage() {
 
                 <div className="bg-slate-800/80 p-3 rounded-xl flex justify-between items-center">
                   <span className="text-slate-400">Account Number:</span>
-                  <span className="font-mono text-[#f5b82e] font-bold">[TO BE FILLED BY FOUNDER]</span>
+                  <span className="font-mono text-cyan-300 font-bold">[TO BE FILLED BY FOUNDER]</span>
                 </div>
 
                 <div className="bg-slate-800/80 p-3 rounded-xl flex justify-between items-center">
@@ -319,13 +315,13 @@ export default function DonatePage() {
 
                 <div className="bg-slate-800/80 p-3 rounded-xl flex justify-between items-center">
                   <span className="text-slate-400">UPI ID:</span>
-                  <span className="font-mono text-emerald-400 font-bold">[TO BE FILLED BY FOUNDER]</span>
+                  <span className="font-mono text-cyan-300 font-bold">[TO BE FILLED BY FOUNDER]</span>
                 </div>
               </div>
 
               {/* UPI QR Display */}
               <div className="text-center pt-2">
-                <div className="w-36 h-36 bg-white rounded-2xl mx-auto p-3 shadow-md flex items-center justify-center border-2 border-[#f5b82e]">
+                <div className="w-36 h-36 bg-white rounded-2xl mx-auto p-3 shadow-md flex items-center justify-center border-2 border-[#0090b0]">
                   <QrCode className="w-full h-full text-slate-900" />
                 </div>
                 <span className="text-[10px] text-slate-400 mt-2 block">Scan with GPay, PhonePe, Paytm or BHIM</span>
@@ -333,8 +329,8 @@ export default function DonatePage() {
             </div>
 
             {/* 80G Status Info */}
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 text-xs text-amber-900 space-y-1">
-              <h4 className="font-bold text-amber-900">80G Income Tax Benefit Information</h4>
+            <div className="bg-cyan-50 border border-cyan-200 rounded-2xl p-5 text-xs text-slate-800 space-y-1">
+              <h4 className="font-bold text-[#007085]">80G Income Tax Benefit Information</h4>
               <p className="text-slate-700">
                 Jhanvit Foundation is in the process of obtaining 80G certification under the Income Tax Act. Once approved, all past donors will receive tax deduction certificates.
               </p>

@@ -48,7 +48,7 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-4 pt-4 md:pt-0 justify-center text-center md:text-left">
-            <div className="w-14 h-14 rounded-2xl bg-red-50 text-[#801800] flex items-center justify-center flex-shrink-0">
+            <div className="w-14 h-14 rounded-2xl bg-[#e6f7fa] text-[#0090b0] flex items-center justify-center flex-shrink-0">
               <Building2 className="w-7 h-7" />
             </div>
             <div>
@@ -58,7 +58,7 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-4 pt-4 md:pt-0 justify-center text-center md:text-left">
-            <div className="w-14 h-14 rounded-2xl bg-amber-50 text-[#f5b82e] flex items-center justify-center flex-shrink-0">
+            <div className="w-14 h-14 rounded-2xl bg-[#e6f7fa] text-[#0090b0] flex items-center justify-center flex-shrink-0">
               <Calendar className="w-7 h-7" />
             </div>
             <div>
@@ -72,9 +72,6 @@ export default function Home() {
       {/* What We Do - 3 Key Pillars Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-[#0090b0] bg-[#e6f7fa] px-3 py-1 rounded-full">
-            Our Core Initiatives
-          </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             How Jhanvit Foundation Empowers Aspirants
           </h2>
@@ -100,7 +97,7 @@ export default function Home() {
             <div className="pt-6 border-t border-slate-100 mt-6">
               <Link
                 href="/consultation"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0090b0] hover:text-[#00667e] transition group-hover:translate-x-1"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0090b0] hover:text-[#007085] transition group-hover:translate-x-1"
               >
                 Book a Guidance Session <ArrowRight className="w-4 h-4" />
               </Link>
@@ -110,10 +107,10 @@ export default function Home() {
           {/* Card 2 — Study Space */}
           <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-slate-100 flex flex-col justify-between group">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-red-50 text-[#801800] flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-xl bg-[#e6f7fa] text-[#0090b0] flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Building2 className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#801800] transition">
+              <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#0090b0] transition">
                 ANUBHAVV Study Space
               </h3>
               <p className="text-slate-600 text-sm leading-relaxed">
@@ -123,7 +120,7 @@ export default function Home() {
             <div className="pt-6 border-t border-slate-100 mt-6">
               <Link
                 href="/anubhavv"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#801800] hover:text-[#571000] transition group-hover:translate-x-1"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0090b0] hover:text-[#007085] transition group-hover:translate-x-1"
               >
                 Explore Study Hall & Seats <ArrowRight className="w-4 h-4" />
               </Link>
@@ -133,10 +130,10 @@ export default function Home() {
           {/* Card 3 — Sponsorship */}
           <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-slate-100 flex flex-col justify-between group">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-amber-50 text-[#f5b82e] flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-xl bg-[#e6f7fa] text-[#0090b0] flex items-center justify-center group-hover:scale-110 transition-transform">
                 <HeartHandshake className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 group-hover:text-amber-600 transition">
+              <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#0090b0] transition">
                 Student Seat Sponsorship
               </h3>
               <p className="text-slate-600 text-sm leading-relaxed">
@@ -146,7 +143,7 @@ export default function Home() {
             <div className="pt-6 border-t border-slate-100 mt-6">
               <Link
                 href="/sponsorship"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 hover:text-amber-700 transition group-hover:translate-x-1"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0090b0] hover:text-[#007085] transition group-hover:translate-x-1"
               >
                 Apply or Sponsor a Seat <ArrowRight className="w-4 h-4" />
               </Link>
@@ -163,7 +160,7 @@ export default function Home() {
             &ldquo;Every youth who fails not because of lack of merit, but because of lack of a structured environment — is a failure of the system. Jhanvit Foundation exists to fix that.&rdquo;
           </blockquote>
           <div className="pt-4 border-t border-slate-800 inline-block">
-            <div className="font-bold text-lg text-[#f5b82e]">Ganesh Zanjad</div>
+            <div className="font-bold text-lg text-white">Ganesh Zanjad</div>
             <div className="text-xs text-slate-400">Founder & Director, Jhanvit Foundation • Ex-Teach For India (Cohort 2023)</div>
           </div>
         </div>
@@ -171,12 +168,8 @@ export default function Home() {
 
       {/* Operational Transparency Banner: Jhanvit vs ANUBHAVV */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="bg-amber-500/10 border border-amber-200 rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-cyan-50 border border-cyan-200 rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-xs font-bold text-amber-800 bg-amber-100 px-3 py-1 rounded-full">
-              <ShieldAlert className="w-4 h-4 text-amber-700" />
-              Important Entity Distinction
-            </div>
             <h3 className="text-2xl font-bold text-slate-900">
               Understanding Jhanvit Foundation & ANUBHAVV Impact Labs
             </h3>
@@ -187,13 +180,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             <Link
               href="/donate"
-              className="bg-[#0090b0] hover:bg-[#00667e] text-white font-bold text-xs px-5 py-3 rounded-xl text-center shadow transition"
+              className="bg-[#007085] hover:bg-[#005c6d] text-white font-bold text-xs px-5 py-3 rounded-xl text-center shadow transition"
             >
               Donate to Jhanvit
             </Link>
             <Link
               href="/anubhavv"
-              className="bg-[#801800] hover:bg-[#571000] text-white font-bold text-xs px-5 py-3 rounded-xl text-center shadow transition"
+              className="bg-[#005c6d] hover:bg-[#004857] text-white font-bold text-xs px-5 py-3 rounded-xl text-center shadow transition"
             >
               Book ANUBHAVV Seat
             </Link>
@@ -202,7 +195,7 @@ export default function Home() {
       </section>
 
       {/* Call To Action Banner */}
-      <section className="bg-gradient-to-r from-[#0090b0] to-[#00667e] text-white py-16 px-4 text-center">
+      <section className="bg-[#007085] border-t-2 border-[#006072] text-white py-16 px-4 text-center">
         <div className="max-w-3xl mx-auto space-y-6">
           <h2 className="text-3xl font-extrabold tracking-tight">
             Ready to Take Control of Your Preparation?
@@ -213,13 +206,13 @@ export default function Home() {
           <div className="flex flex-wrap justify-center gap-4 pt-2">
             <Link
               href="/consultation"
-              className="bg-[#f5b82e] hover:bg-amber-400 text-[#0f172a] font-extrabold text-sm px-6 py-3.5 rounded-xl shadow-lg transition"
+              className="bg-white hover:bg-slate-100 text-[#007085] font-extrabold text-sm px-6 py-3.5 rounded-xl shadow transition"
             >
               Book Guidance Session
             </Link>
             <Link
               href="/anubhavv"
-              className="bg-white hover:bg-slate-100 text-[#0090b0] font-extrabold text-sm px-6 py-3.5 rounded-xl shadow-lg transition"
+              className="bg-[#005c6d] hover:bg-[#004857] text-white font-extrabold text-sm px-6 py-3.5 rounded-xl shadow transition border border-white/20"
             >
               Book ANUBHAVV Study Seat
             </Link>

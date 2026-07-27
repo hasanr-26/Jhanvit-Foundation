@@ -12,35 +12,31 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
           {/* Col 1: Brand & NGO info */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="relative w-12 h-12 bg-white rounded-lg p-1 flex-shrink-0">
-                <Image
-                  src="/images/jhanvit_logo.png"
-                  alt="Jhanvit Foundation"
-                  fill
-                  className="object-contain p-0.5"
-                />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-white tracking-tight">JHANVIT FOUNDATION</h3>
-                <p className="text-xs text-[#0090b0] font-semibold">Section 8 Non-Profit Company</p>
-              </div>
+            <div className="flex flex-col gap-2">
+              <Image
+                src="/images/jhanvit_logo_transparent.png"
+                alt="Jhanvit Foundation"
+                width={280}
+                height={90}
+                className="object-contain h-24 md:h-28 w-auto"
+              />
+              <p className="text-xs text-center text-cyan-300 font-bold">Section 8 Non-Profit Organisation</p>
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-center text-slate-400 leading-relaxed">
               Empowering competitive exam aspirants in Pune through structured study spaces, expert guidance, and financial sponsorship.
             </p>
-            <div className="bg-slate-800/80 rounded-lg p-3 border border-slate-700 text-xs space-y-1">
+            <div className="bg-slate-800/80 rounded-xl p-3.5 border border-slate-700 text-xs space-y-1.5">
               <div className="flex justify-between">
                 <span className="text-slate-400">CIN:</span>
-                <span className="font-mono text-[#f5b82e] font-semibold">U85499PN2026NPL255094</span>
+                <span className="font-mono text-cyan-300 font-bold">U85499PN2026NPL255094</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">PAN:</span>
-                <span className="font-mono text-slate-200">AAHCJ3974C</span>
+                <span className="font-mono text-white font-semibold">AAHCJ3974C</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">Incorporation:</span>
-                <span className="text-slate-200">28 April 2026</span>
+                <span className="text-white font-medium">28 April 2026</span>
               </div>
             </div>
           </div>
@@ -52,32 +48,32 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <Link href="/about" className="hover:text-[#0090b0] transition flex items-center gap-1.5">
+                <Link href="/about" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> About Jhanvit Foundation
                 </Link>
               </li>
               <li>
-                <Link href="/anubhavv" className="hover:text-[#0090b0] transition flex items-center gap-1.5">
+                <Link href="/anubhavv" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> ANUBHAVV Abhyasika Study Hall
                 </Link>
               </li>
               <li>
-                <Link href="/consultation" className="hover:text-[#0090b0] transition flex items-center gap-1.5">
+                <Link href="/consultation" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> Book Consultation (UPSC/MPSC)
                 </Link>
               </li>
               <li>
-                <Link href="/sponsorship" className="hover:text-[#0090b0] transition flex items-center gap-1.5">
+                <Link href="/sponsorship" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> Apply for Sponsored Seat
                 </Link>
               </li>
               <li>
-                <Link href="/donate" className="hover:text-[#0090b0] transition flex items-center gap-1.5">
+                <Link href="/donate" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> Support an Aspirant (Donate)
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-[#0090b0] transition flex items-center gap-1.5">
+                <Link href="/contact" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> Contact & Directions
                 </Link>
               </li>
@@ -86,38 +82,38 @@ export default function Footer() {
 
           {/* Col 3: Operational & Reg Addresses */}
           <div className="space-y-4">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider border-l-2 border-[#f5b82e] pl-2.5">
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider border-l-2 border-[#0090b0] pl-2.5">
               Contact & Location
             </h4>
             <div className="space-y-3 text-xs">
               <div className="flex gap-2">
                 <MapPin className="w-4 h-4 text-[#0090b0] flex-shrink-0 mt-0.5" />
-                <div>
+                <div className="text-slate-300">
                   <span className="font-semibold text-white block">Operational Center:</span>
                   2nd Floor, Above ICICI Bank, Gogate Chambers, Nagnath Par, Sadashiv Peth, Pune – 411030
                 </div>
               </div>
               <div className="flex gap-2">
-                <Phone className="w-4 h-4 text-[#f5b82e] flex-shrink-0 mt-0.5" />
-                <div>
+                <Phone className="w-4 h-4 text-[#0090b0] flex-shrink-0 mt-0.5" />
+                <div className="text-slate-300">
                   <span className="font-semibold text-white block">Phone Numbers:</span>
-                  <a href="tel:7066422555" className="hover:underline">7066422555</a> / <a href="tel:9637502333" className="hover:underline">9637502333</a>
+                  <a href="tel:7066422555" className="hover:underline hover:text-[#0090b0]">7066422555</a> / <a href="tel:9637502333" className="hover:underline hover:text-[#0090b0]">9637502333</a>
                 </div>
               </div>
               <div className="flex gap-2">
                 <Mail className="w-4 h-4 text-[#0090b0] flex-shrink-0 mt-0.5" />
-                <div>
+                <div className="text-slate-300">
                   <span className="font-semibold text-white block">Email:</span>
-                  <a href="mailto:anubhavveducation@gmail.com" className="hover:underline">anubhavveducation@gmail.com</a>
+                  <a href="mailto:anubhavveducation@gmail.com" className="hover:underline hover:text-[#0090b0]">anubhavveducation@gmail.com</a>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Col 4: Partner Entity Notice & CTA */}
-          <div className="space-y-4 bg-slate-800/40 p-4 rounded-xl border border-slate-800">
+          <div className="space-y-4 bg-slate-800/80 p-4.5 rounded-xl border border-slate-700">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-[#f5b82e]" />
+              <ShieldCheck className="w-5 h-5 text-[#0090b0]" />
               <h4 className="text-sm font-bold text-white">Transparency Notice</h4>
             </div>
             <p className="text-[11px] text-slate-300 leading-relaxed">
@@ -125,7 +121,7 @@ export default function Footer() {
             </p>
             <Link
               href="/donate"
-              className="inline-flex items-center justify-center gap-2 w-full bg-[#f5b82e] hover:bg-amber-400 text-[#0f172a] text-xs font-bold py-2.5 rounded-lg transition"
+              className="inline-flex items-center justify-center gap-2 w-full bg-[#0090b0] hover:bg-[#007894] text-white text-xs font-bold py-2.5 rounded-xl transition shadow"
             >
               <HeartHandshake className="w-4 h-4" />
               Sponsor A Student Seat

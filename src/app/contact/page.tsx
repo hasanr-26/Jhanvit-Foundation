@@ -47,14 +47,10 @@ export default function ContactPage() {
       <Navbar />
 
       {/* Hero Banner */}
-      <section className="bg-gradient-to-r from-[#0f172a] via-[#00667e] to-[#0090b0] text-white pt-32 pb-20 px-4 sm:px-6">
+      <section className="bg-[#007085] text-white pt-28 sm:pt-32 pb-16 px-4 sm:px-6 border-b-4 border-[#005e70]">
         <div className="max-w-7xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#f5b82e] text-xs font-semibold">
-            <MessageSquare className="w-4 h-4 text-[#f5b82e]" />
-            We Are Here To Help
-          </div>
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">Get in Touch</h1>
-          <p className="max-w-2xl mx-auto text-slate-200 text-base">
+          <p className="max-w-2xl mx-auto text-cyan-50 text-base">
             Have questions about consultation, study hall seats, or sponsorship? Contact our team today.
           </p>
         </div>

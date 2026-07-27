@@ -17,13 +17,10 @@ export default function AboutPage() {
       <Navbar />
 
       {/* Page Header Banner */}
-      <section className="bg-gradient-to-r from-[#0f172a] via-[#00667e] to-[#0090b0] text-white pt-32 pb-20 px-4 sm:px-6">
+      <section className="bg-[#007085] text-white pt-28 sm:pt-32 pb-16 px-4 sm:px-6 border-b-4 border-[#005e70]">
         <div className="max-w-7xl mx-auto text-center space-y-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#f5b82e] bg-white/10 px-3.5 py-1.5 rounded-full border border-white/20">
-            Section 8 Non-Profit Organisation
-          </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">About Jhanvit Foundation</h1>
-          <p className="max-w-2xl mx-auto text-slate-200 text-base">
+          <p className="max-w-2xl mx-auto text-cyan-50 text-base">
             Empowering competitive exam aspirants in Pune through structured study spaces, expert guidance, and financial sponsorship.
           </p>
         </div>
@@ -33,9 +30,6 @@ export default function AboutPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-[#0090b0] bg-[#e6f7fa] px-3 py-1 rounded-full">
-              Who We Are
-            </span>
             <h2 className="text-3xl font-extrabold text-slate-900 leading-tight">
               Registered Under Ministry of Corporate Affairs, Govt. of India
             </h2>
