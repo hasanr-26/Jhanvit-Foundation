@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
@@ -15,8 +15,10 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { getSiteConfig, SiteConfig, DEFAULT_SITE_CONFIG } from '@/lib/siteConfig';
 
 export default function ContactPage() {
+  const [siteConfig, setSiteConfig] = useState<SiteConfig>(DEFAULT_SITE_CONFIG);
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
@@ -26,6 +28,10 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    setSiteConfig(getSiteConfig());
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,7 +84,7 @@ export default function ContactPage() {
                 </div>
                 <div className="text-xs">
                   <h4 className="font-bold text-slate-900 text-sm">Operational Center</h4>
-                  <p className="text-slate-600 mt-1">2nd Floor, Above ICICI Bank, Gogate Chambers, Nagnath Par, Sadashiv Peth, Pune – 411030</p>
+                  <p className="text-slate-600 mt-1">{siteConfig.operationalAddress}</p>
                 </div>
               </div>
 
@@ -89,7 +95,10 @@ export default function ContactPage() {
                 <div className="text-xs">
                   <h4 className="font-bold text-slate-900 text-sm">Phone Numbers</h4>
                   <p className="text-slate-600 mt-1">
-                    <a href="tel:7066422555" className="hover:underline text-[#0090b0] font-bold">7066422555</a> / <a href="tel:9637502333" className="hover:underline text-[#0090b0] font-bold">9637502333</a>
+                    <a href={`tel:${siteConfig.phone1}`} className="hover:underline text-[#0090b0] font-bold">{siteConfig.phone1}</a>
+                    {siteConfig.phone2 && (
+                      <> / <a href={`tel:${siteConfig.phone2}`} className="hover:underline text-[#0090b0] font-bold">{siteConfig.phone2}</a></>
+                    )}
                   </p>
                 </div>
               </div>
@@ -101,7 +110,7 @@ export default function ContactPage() {
                 <div className="text-xs">
                   <h4 className="font-bold text-slate-900 text-sm">Email Address</h4>
                   <p className="text-slate-600 mt-1">
-                    <a href="mailto:anubhavveducation@gmail.com" className="hover:underline text-[#0090b0] font-bold">anubhavveducation@gmail.com</a>
+                    <a href={`mailto:${siteConfig.email}`} className="hover:underline text-[#0090b0] font-bold">{siteConfig.email}</a>
                   </p>
                 </div>
               </div>
@@ -112,7 +121,7 @@ export default function ContactPage() {
                 </div>
                 <div className="text-xs">
                   <h4 className="font-bold text-slate-900 text-sm">Working Hours</h4>
-                  <p className="text-slate-600 mt-1">Study Hall: Open 24x7. Office queries responded 9 AM – 8 PM daily.</p>
+                  <p className="text-slate-600 mt-1">{siteConfig.workingHours}</p>
                 </div>
               </div>
             </div>
@@ -214,7 +223,7 @@ export default function ContactPage() {
                   </div>
                   <h3 className="text-2xl font-extrabold text-slate-900">Message Received!</h3>
                   <p className="text-xs text-slate-600 leading-relaxed max-w-md mx-auto">
-                    Thank you {formData.fullName}! Your message has been sent to <strong>anubhavveducation@gmail.com</strong>. We will get back to you shortly at {formData.phone}.
+                    Thank you {formData.fullName}! Your message has been sent to <strong>{siteConfig.email}</strong>. We will get back to you shortly at {formData.phone}.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}

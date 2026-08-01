@@ -1,11 +1,18 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, ShieldCheck, HeartHandshake, ArrowUpRight } from 'lucide-react';
+import { getSiteConfig, SiteConfig, DEFAULT_SITE_CONFIG } from '@/lib/siteConfig';
 
 export default function Footer() {
+  const [config, setConfig] = useState<SiteConfig>(DEFAULT_SITE_CONFIG);
+
+  useEffect(() => {
+    setConfig(getSiteConfig());
+  }, []);
+
   return (
     <footer className="bg-[#0f172a] text-slate-300 pt-16 pb-12 border-t-4 border-[#0090b0] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,15 +35,15 @@ export default function Footer() {
             <div className="bg-slate-800/80 rounded-xl p-3.5 border border-slate-700 text-xs space-y-1.5">
               <div className="flex justify-between">
                 <span className="text-slate-400">CIN:</span>
-                <span className="font-mono text-cyan-300 font-bold">U85499PN2026NPL255094</span>
+                <span className="font-mono text-cyan-300 font-bold">{config.cin}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">PAN:</span>
-                <span className="font-mono text-white font-semibold">AAHCJ3974C</span>
+                <span className="font-mono text-white font-semibold">{config.pan}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">Incorporation:</span>
-                <span className="text-white font-medium">28 April 2026</span>
+                <span className="text-white font-medium">{config.dateOfIncorporation}</span>
               </div>
             </div>
           </div>
@@ -90,21 +97,24 @@ export default function Footer() {
                 <MapPin className="w-4 h-4 text-[#0090b0] flex-shrink-0 mt-0.5" />
                 <div className="text-slate-300">
                   <span className="font-semibold text-white block">Operational Center:</span>
-                  2nd Floor, Above ICICI Bank, Gogate Chambers, Nagnath Par, Sadashiv Peth, Pune – 411030
+                  {config.operationalAddress}
                 </div>
               </div>
               <div className="flex gap-2">
                 <Phone className="w-4 h-4 text-[#0090b0] flex-shrink-0 mt-0.5" />
                 <div className="text-slate-300">
                   <span className="font-semibold text-white block">Phone Numbers:</span>
-                  <a href="tel:7066422555" className="hover:underline hover:text-[#0090b0]">7066422555</a> / <a href="tel:9637502333" className="hover:underline hover:text-[#0090b0]">9637502333</a>
+                  <a href={`tel:${config.phone1}`} className="hover:underline hover:text-[#0090b0]">{config.phone1}</a>
+                  {config.phone2 && (
+                    <> / <a href={`tel:${config.phone2}`} className="hover:underline hover:text-[#0090b0]">{config.phone2}</a></>
+                  )}
                 </div>
               </div>
               <div className="flex gap-2">
                 <Mail className="w-4 h-4 text-[#0090b0] flex-shrink-0 mt-0.5" />
                 <div className="text-slate-300">
                   <span className="font-semibold text-white block">Email:</span>
-                  <a href="mailto:anubhavveducation@gmail.com" className="hover:underline hover:text-[#0090b0]">anubhavveducation@gmail.com</a>
+                  <a href={`mailto:${config.email}`} className="hover:underline hover:text-[#0090b0]">{config.email}</a>
                 </div>
               </div>
             </div>
@@ -131,7 +141,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 gap-4">
-          <p>© 2026 Jhanvit Foundation. All rights reserved. Registered under MCA, Govt of India.</p>
+          <p>© 2026 {config.orgName}. All rights reserved. Registered under MCA, Govt of India.</p>
           <p className="flex items-center gap-2">
             Founder & Director: <span className="text-slate-300 font-semibold">Ganesh Zanjad</span>
           </p>

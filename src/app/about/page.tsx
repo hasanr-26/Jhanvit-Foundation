@@ -1,17 +1,21 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { Target, Compass, Award, Shield, User, MapPin, Building, FileCheck } from 'lucide-react';
-
-export const metadata = {
-  title: "About Us | Jhanvit Foundation — Section 8 NGO",
-  description: "Learn about Jhanvit Foundation's vision, mission, founder Ganesh Zanjad, Section 8 non-profit legal credentials, and core values.",
-};
+import { getSiteConfig, SiteConfig, DEFAULT_SITE_CONFIG } from '@/lib/siteConfig';
 
 export default function AboutPage() {
+  const [config, setConfig] = useState<SiteConfig>(DEFAULT_SITE_CONFIG);
+
+  useEffect(() => {
+    setConfig(getSiteConfig());
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
       <Navbar />
@@ -159,38 +163,38 @@ export default function AboutPage() {
           <div className="divide-y divide-slate-100 text-sm">
             <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-3 gap-2 bg-slate-50">
               <span className="font-bold text-slate-700">Organisation Name</span>
-              <span className="sm:col-span-2 font-semibold text-[#0090b0]">Jhanvit Foundation</span>
+              <span className="sm:col-span-2 font-semibold text-[#0090b0]">{config.orgName}</span>
             </div>
             <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-3 gap-2">
               <span className="font-bold text-slate-700">Legal Entity Type</span>
-              <span className="sm:col-span-2 text-slate-800">Section 8 Non-Profit Company under Companies Act, 2013</span>
+              <span className="sm:col-span-2 text-slate-800">{config.legalEntityType}</span>
             </div>
             <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-3 gap-2 bg-slate-50">
               <span className="font-bold text-slate-700">Corporate Identification Number (CIN)</span>
               <span className="sm:col-span-2 font-mono font-bold text-[#f5b82e] bg-slate-900 px-3 py-1 rounded inline-block w-fit">
-                U85499PN2026NPL255094
+                {config.cin}
               </span>
             </div>
             <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-3 gap-2">
               <span className="font-bold text-slate-700">PAN Number</span>
-              <span className="sm:col-span-2 font-mono text-slate-800">AAHCJ3974C</span>
+              <span className="sm:col-span-2 font-mono text-slate-800">{config.pan}</span>
             </div>
             <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-3 gap-2 bg-slate-50">
               <span className="font-bold text-slate-700">Date of Incorporation</span>
-              <span className="sm:col-span-2 text-slate-800">28 April 2026</span>
+              <span className="sm:col-span-2 text-slate-800">{config.dateOfIncorporation}</span>
             </div>
             <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-3 gap-2">
               <span className="font-bold text-slate-700">Registered Office Address</span>
-              <span className="sm:col-span-2 text-slate-800">Chawl No. B-32/19, Upper Indira Nagar, Bibvewadi, Pune – 411037</span>
+              <span className="sm:col-span-2 text-slate-800">{config.registeredAddress}</span>
             </div>
             <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-3 gap-2 bg-slate-50">
               <span className="font-bold text-slate-700">Operational Study Center</span>
-              <span className="sm:col-span-2 text-slate-800">2nd Floor, Above ICICI Bank, Gogate Chambers, Nagnath Par, Sadashiv Peth, Pune – 411030</span>
+              <span className="sm:col-span-2 text-slate-800">{config.operationalAddress}</span>
             </div>
             <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-3 gap-2">
               <span className="font-bold text-slate-700">80G Tax Exemption Status</span>
               <span className="sm:col-span-2 text-amber-700 font-semibold bg-amber-50 px-3 py-1 rounded inline-block w-fit">
-                Registration in Process (Will be updated once approved)
+                {config.taxExemptionStatus}
               </span>
             </div>
           </div>

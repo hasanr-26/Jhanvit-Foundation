@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
@@ -15,8 +15,10 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { getSiteConfig, SiteConfig, DEFAULT_SITE_CONFIG } from '@/lib/siteConfig';
 
 export default function DonatePage() {
+  const [siteConfig, setSiteConfig] = useState<SiteConfig>(DEFAULT_SITE_CONFIG);
   const [selectedTier, setSelectedTier] = useState<number | 'custom'>(2000);
   const [customAmount, setCustomAmount] = useState<string>('');
   const [donorInfo, setDonorInfo] = useState({
@@ -27,6 +29,14 @@ export default function DonatePage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [donated, setDonated] = useState(false);
+
+  useEffect(() => {
+    const config = getSiteConfig();
+    setSiteConfig(config);
+    // Set default selected tier to the "popular" preset amount
+    const popular = config.donationPresets.find((p) => p.popular);
+    if (popular) setSelectedTier(popular.amount);
+  }, []);
 
   const getFinalAmount = () => {
     if (selectedTier === 'custom') {
@@ -69,7 +79,7 @@ export default function DonatePage() {
         <div className="bg-cyan-50 border border-cyan-200 rounded-2xl p-4 flex items-center gap-3 text-xs text-slate-800 font-medium">
           <ShieldCheck className="w-5 h-5 text-[#007085] flex-shrink-0" />
           <span>
-            <strong>Official Jhanvit Foundation Account Only:</strong> All donations go directly to Jhanvit Foundation (Section 8 Non-Profit, CIN: U85499PN2026NPL255094). Never transfer donation funds to ANUBHAVV accounts.
+            <strong>Official Jhanvit Foundation Account Only:</strong> All donations go directly to Jhanvit Foundation (Section 8 Non-Profit, CIN: {siteConfig.cin}). Never transfer donation funds to ANUBHAVV accounts.
           </span>
         </div>
       </section>
@@ -82,60 +92,26 @@ export default function DonatePage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div
-            onClick={() => setSelectedTier(500)}
-            className={`p-6 rounded-2xl border cursor-pointer transition-all ${
-              selectedTier === 500
-                ? 'bg-[#e6f7fa] border-[#0090b0] ring-2 ring-[#0090b0] shadow-md'
-                : 'bg-white border-slate-200 hover:border-slate-300'
-            }`}
-          >
-            <div className="text-2xl font-extrabold text-[#0090b0]">₹500</div>
-            <div className="font-bold text-slate-900 text-sm mt-1">1 Week Sponsorship</div>
-            <p className="text-xs text-slate-600 mt-2">Contributes to one week of 24x7 study hall access for a student.</p>
-          </div>
-
-          <div
-            onClick={() => setSelectedTier(2000)}
-            className={`p-6 rounded-2xl border cursor-pointer transition-all relative ${
-              selectedTier === 2000
-                ? 'bg-[#e6f7fa] border-[#0090b0] ring-2 ring-[#0090b0] shadow-md'
-                : 'bg-white border-slate-200 hover:border-slate-300'
-            }`}
-          >
-            <span className="absolute -top-3 right-4 bg-[#007085] text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
-              Most Popular
-            </span>
-            <div className="text-2xl font-extrabold text-[#0090b0]">₹2,000</div>
-            <div className="font-bold text-slate-900 text-sm mt-1">1 Full Month Seat</div>
-            <p className="text-xs text-slate-600 mt-2">Sponsors 1 full month of dedicated study seat for 1 aspirant.</p>
-          </div>
-
-          <div
-            onClick={() => setSelectedTier(6000)}
-            className={`p-6 rounded-2xl border cursor-pointer transition-all ${
-              selectedTier === 6000
-                ? 'bg-[#e6f7fa] border-[#0090b0] ring-2 ring-[#0090b0] shadow-md'
-                : 'bg-white border-slate-200 hover:border-slate-300'
-            }`}
-          >
-            <div className="text-2xl font-extrabold text-[#0090b0]">₹6,000</div>
-            <div className="font-bold text-slate-900 text-sm mt-1">Full Quarter (3 Months)</div>
-            <p className="text-xs text-slate-600 mt-2">Sponsors 1 student through their critical Prelims or Mains prep phase.</p>
-          </div>
-
-          <div
-            onClick={() => setSelectedTier(24000)}
-            className={`p-6 rounded-2xl border cursor-pointer transition-all ${
-              selectedTier === 24000
-                ? 'bg-[#e6f7fa] border-[#0090b0] ring-2 ring-[#0090b0] shadow-md'
-                : 'bg-white border-slate-200 hover:border-slate-300'
-            }`}
-          >
-            <div className="text-2xl font-extrabold text-[#0090b0]">₹24,000</div>
-            <div className="font-bold text-slate-900 text-sm mt-1">Full Year Sponsorship</div>
-            <p className="text-xs text-slate-600 mt-2">Sponsors an aspirant for an entire year until their target exam.</p>
-          </div>
+          {siteConfig.donationPresets.map((preset, i) => (
+            <div
+              key={i}
+              onClick={() => setSelectedTier(preset.amount)}
+              className={`p-6 rounded-2xl border cursor-pointer transition-all relative ${
+                selectedTier === preset.amount
+                  ? 'bg-[#e6f7fa] border-[#0090b0] ring-2 ring-[#0090b0] shadow-md'
+                  : 'bg-white border-slate-200 hover:border-slate-300'
+              }`}
+            >
+              {preset.popular && (
+                <span className="absolute -top-3 right-4 bg-[#007085] text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
+                  Most Popular
+                </span>
+              )}
+              <div className="text-2xl font-extrabold text-[#0090b0]">₹{preset.amount.toLocaleString()}</div>
+              <div className="font-bold text-slate-900 text-sm mt-1">{preset.label}</div>
+              <p className="text-xs text-slate-600 mt-2">{preset.description}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -154,18 +130,18 @@ export default function DonatePage() {
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-2">Select Donation Amount</label>
                   <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 text-xs font-bold">
-                    {[500, 2000, 6000, 24000].map((amt) => (
+                    {siteConfig.donationPresets.map((preset) => (
                       <button
                         type="button"
-                        key={amt}
-                        onClick={() => setSelectedTier(amt)}
+                        key={preset.amount}
+                        onClick={() => setSelectedTier(preset.amount)}
                         className={`py-2.5 rounded-xl border transition ${
-                          selectedTier === amt
+                          selectedTier === preset.amount
                             ? 'bg-[#0090b0] text-white border-[#0090b0]'
                             : 'bg-slate-50 text-slate-800 border-slate-200 hover:bg-slate-100'
                         }`}
                       >
-                        ₹{amt.toLocaleString()}
+                        ₹{preset.amount.toLocaleString()}
                       </button>
                     ))}
                     <button
@@ -295,27 +271,35 @@ export default function DonatePage() {
               <div className="space-y-3 text-xs">
                 <div className="bg-slate-800/80 p-3 rounded-xl flex justify-between items-center">
                   <span className="text-slate-400">Account Name:</span>
-                  <span className="font-bold text-white">Jhanvit Foundation</span>
+                  <span className="font-bold text-white">{siteConfig.bankAccountName || 'Jhanvit Foundation'}</span>
                 </div>
 
                 <div className="bg-slate-800/80 p-3 rounded-xl flex justify-between items-center">
                   <span className="text-slate-400">Account Number:</span>
-                  <span className="font-mono text-cyan-300 font-bold">[TO BE FILLED BY FOUNDER]</span>
+                  <span className="font-mono text-cyan-300 font-bold">
+                    {siteConfig.bankAccountNumber || '[To be filled by Founder]'}
+                  </span>
                 </div>
 
                 <div className="bg-slate-800/80 p-3 rounded-xl flex justify-between items-center">
                   <span className="text-slate-400">IFSC Code:</span>
-                  <span className="font-mono text-slate-200 font-bold">[TO BE FILLED BY FOUNDER]</span>
+                  <span className="font-mono text-slate-200 font-bold">
+                    {siteConfig.bankIfscCode || '[To be filled by Founder]'}
+                  </span>
                 </div>
 
                 <div className="bg-slate-800/80 p-3 rounded-xl flex justify-between items-center">
                   <span className="text-slate-400">Bank Name:</span>
-                  <span className="text-slate-200 font-bold">[TO BE FILLED BY FOUNDER]</span>
+                  <span className="text-slate-200 font-bold">
+                    {siteConfig.bankName || '[To be filled by Founder]'}
+                  </span>
                 </div>
 
                 <div className="bg-slate-800/80 p-3 rounded-xl flex justify-between items-center">
                   <span className="text-slate-400">UPI ID:</span>
-                  <span className="font-mono text-cyan-300 font-bold">[TO BE FILLED BY FOUNDER]</span>
+                  <span className="font-mono text-cyan-300 font-bold">
+                    {siteConfig.upiId || '[To be filled by Founder]'}
+                  </span>
                 </div>
               </div>
 
@@ -331,9 +315,7 @@ export default function DonatePage() {
             {/* 80G Status Info */}
             <div className="bg-cyan-50 border border-cyan-200 rounded-2xl p-5 text-xs text-slate-800 space-y-1">
               <h4 className="font-bold text-[#007085]">80G Income Tax Benefit Information</h4>
-              <p className="text-slate-700">
-                Jhanvit Foundation is in the process of obtaining 80G certification under the Income Tax Act. Once approved, all past donors will receive tax deduction certificates.
-              </p>
+              <p className="text-slate-700">{siteConfig.taxExemptionStatus}</p>
             </div>
           </div>
         </div>

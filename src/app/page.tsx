@@ -5,13 +5,12 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroSlider from '@/components/HeroSlider';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import StatsBar from '@/components/StatsBar';
 import {
   BookOpen,
   Building2,
   HeartHandshake,
-  Users,
   Award,
-  Calendar,
   CheckCircle2,
   ArrowRight,
   Quote,
@@ -35,39 +34,7 @@ export default function Home() {
       <HeroSlider />
 
       {/* Impact Numbers Counter Section */}
-      <section className="relative z-20 -mt-10 max-w-6xl mx-auto px-4 sm:px-6 w-full">
-        <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-          <div className="flex items-center gap-4 pt-4 md:pt-0 justify-center text-center md:text-left">
-            <div className="w-14 h-14 rounded-2xl bg-[#e6f7fa] text-[#0090b0] flex items-center justify-center flex-shrink-0">
-              <Users className="w-7 h-7" />
-            </div>
-            <div>
-              <div className="text-3xl font-extrabold text-[#0f172a]">120+</div>
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Aspirants Supported</div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 pt-4 md:pt-0 justify-center text-center md:text-left">
-            <div className="w-14 h-14 rounded-2xl bg-[#e6f7fa] text-[#0090b0] flex items-center justify-center flex-shrink-0">
-              <Building2 className="w-7 h-7" />
-            </div>
-            <div>
-              <div className="text-3xl font-extrabold text-[#0f172a]">125</div>
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Study Seats Available</div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 pt-4 md:pt-0 justify-center text-center md:text-left">
-            <div className="w-14 h-14 rounded-2xl bg-[#e6f7fa] text-[#0090b0] flex items-center justify-center flex-shrink-0">
-              <Calendar className="w-7 h-7" />
-            </div>
-            <div>
-              <div className="text-3xl font-extrabold text-[#0f172a]">2026</div>
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Year Founded</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <StatsBar />
 
       {/* What We Do - 3 Key Pillars Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
