@@ -9,11 +9,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 const slides = [
   {
     id: 1,
-    image: '/images/slide1.jpg',
+    image: '/images/facility/facility_wide.png',
     badge: 'Structured Study Hall',
     title: "Building the Environment India's Aspirants Deserve",
-    subtitle: 'ANUBHAV Abhyasika is a dedicated 24x7 study hall in Sadashiv Peth, Pune with individual seats, WiFi, CCTV & a serious peer community.',
-    ctaPrimary: { text: 'Book a Study Seat', href: '/anubhavv', color: 'bg-[#801800] hover:bg-[#571000] text-white' },
+    subtitle: 'ANUBHAVV Abhyasika is a dedicated 24x7 study hall in Sadashiv Peth, Pune with individual seats, WiFi, CCTV & a serious peer community.',
+    ctaPrimary: { text: 'Book a Study Seat', href: '/anubhavv', color: 'bg-[#007085] hover:bg-[#005c6d] text-white' },
   },
   {
     id: 2,
@@ -21,15 +21,15 @@ const slides = [
     badge: 'One-on-One Guidance',
     title: 'Personalised UPSC & MPSC Exam Consultation',
     subtitle: 'Get exam-specific strategy, personalized study plan & honest feedback from experienced mentors at a nominal fee.',
-    ctaPrimary: { text: 'Book Consultation', href: '/consultation', color: 'bg-[#0090b0] hover:bg-[#00667e] text-white' },
+    ctaPrimary: { text: 'Book Consultation', href: '/consultation', color: 'bg-[#007085] hover:bg-[#005c6d] text-white' },
   },
   {
     id: 3,
-    image: '/images/slide3.jpg',
+    image: '/images/facility/facility_cubicles.jpg',
     badge: '24x7 Access in Pune',
     title: 'Quiet, Distraction-Free Study Space for Serious Aspirants',
     subtitle: 'Located in Sadashiv Peth, Pune — charging points at every desk, 9 HD CCTV cameras & daily timetables for UPSC / MPSC prep.',
-    ctaPrimary: { text: 'View Seat Layout', href: '/anubhavv', color: 'bg-[#801800] hover:bg-[#571000] text-white' },
+    ctaPrimary: { text: 'View Seat Layout', href: '/anubhavv', color: 'bg-[#007085] hover:bg-[#005c6d] text-white' },
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const slides = [
     badge: 'Section 8 Non-Profit',
     title: 'No Deserving Aspirant Should Fail Because of Money',
     subtitle: 'Jhanvit Foundation uses donor contributions to sponsor study hall seat fees for low-income candidates.',
-    ctaPrimary: { text: 'Support an Aspirant', href: '/donate', color: 'bg-[#f5b82e] hover:bg-amber-400 text-[#0f172a]' },
+    ctaPrimary: { text: 'Support an Aspirant', href: '/donate', color: 'bg-[#007085] hover:bg-[#005c6d] text-white' },
   },
 ];
 
@@ -75,6 +75,7 @@ export default function HeroSlider() {
             src={slides[currentIndex].image}
             alt={slides[currentIndex].title}
             fill
+            sizes="100vw"
             className="object-cover object-center brightness-[0.38] contrast-[1.05]"
             priority
           />

@@ -7,15 +7,9 @@ import HeroSlider from '@/components/HeroSlider';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import StatsBar from '@/components/StatsBar';
 import {
-  BookOpen,
-  Building2,
-  HeartHandshake,
-  Award,
   CheckCircle2,
   ArrowRight,
   Quote,
-  ShieldAlert,
-  Sparkles,
   MapPin,
 } from 'lucide-react';
 
@@ -36,84 +30,164 @@ export default function Home() {
       {/* Impact Numbers Counter Section */}
       <StatsBar />
 
-      {/* What We Do - 3 Key Pillars Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            How Jhanvit Foundation Empowers Aspirants
+      {/* What We Do - Asymmetric Editorial Bento Grid */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-50 text-[#007085] text-xs sm:text-sm font-bold border border-cyan-200">
+            OUR CORE INITIATIVES
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+            How Jhanvit Foundation Supports Aspirants
           </h2>
-          <p className="text-slate-600 text-base">
-            We bridge the gap between hard work and success by providing guidance, environment, and financial backing.
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            Targeted interventions addressing the critical requirements of competitive exam preparation in Pune.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Card 1 — Consultation */}
-          <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-slate-100 flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-[#e6f7fa] text-[#0090b0] flex items-center justify-center group-hover:scale-110 transition-transform">
-                <BookOpen className="w-6 h-6" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Main Spotlight Card: ANUBHAVV Study Space (7 cols) */}
+          <div className="lg:col-span-7 bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col justify-between group">
+            {/* Top Photo Header */}
+            <div className="relative h-56 sm:h-72 w-full overflow-hidden bg-slate-900">
+              <Image
+                src="/images/facility/facility_cubicles.jpg"
+                alt="ANUBHAVV Study Hall Facility in Pune"
+                fill
+                sizes="(max-width: 1024px) 100vw, 58vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute top-4 left-4">
+                <span className="bg-[#007085] text-white text-xs sm:text-sm font-bold px-3.5 py-1.5 rounded-lg shadow-md flex items-center gap-1">
+                  PHYSICAL FACILITY • 24x7
+                </span>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#0090b0] transition">
-                One-on-One Consultation
-              </h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                We offer expert guidance sessions for UPSC, MPSC, and other competitive exams. Book a session with experienced mentors at a nominal fee to chart your personal roadmap.
-              </p>
             </div>
-            <div className="pt-6 border-t border-slate-100 mt-6">
-              <Link
-                href="/consultation"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0090b0] hover:text-[#007085] transition group-hover:translate-x-1"
-              >
-                Book a Guidance Session <ArrowRight className="w-4 h-4" />
-              </Link>
+
+            {/* Content & Specs */}
+            <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+              <div className="space-y-3">
+                <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#007085]">
+                  <MapPin className="w-4 h-4 text-[#007085]" />
+                  Sadashiv Peth, Pune
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                  ANUBHAVV Abhyasika & Study Space
+                </h3>
+                <p className="text-slate-700 text-base sm:text-lg leading-relaxed">
+                  A dedicated, distraction-free study environment tailored for serious UPSC, MPSC, and state competitive examination aspirants undergoing 10–14 hour daily preparation schedules.
+                </p>
+              </div>
+
+              {/* Feature Highlights Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 text-center">
+                  <div className="text-xl sm:text-2xl font-extrabold text-slate-900">125</div>
+                  <div className="text-xs sm:text-sm font-semibold text-slate-600 mt-0.5">Dedicated Desks</div>
+                </div>
+                <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 text-center">
+                  <div className="text-xl sm:text-2xl font-extrabold text-slate-900">Dual ISP</div>
+                  <div className="text-xs sm:text-sm font-semibold text-slate-600 mt-0.5">Failover WiFi</div>
+                </div>
+                <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 text-center">
+                  <div className="text-xl sm:text-2xl font-extrabold text-slate-900">9 HD</div>
+                  <div className="text-xs sm:text-sm font-semibold text-slate-600 mt-0.5">CCTV Cameras</div>
+                </div>
+                <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 text-center">
+                  <div className="text-xl sm:text-2xl font-extrabold text-slate-900">24x7</div>
+                  <div className="text-xs sm:text-sm font-semibold text-slate-600 mt-0.5">Biometric Access</div>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                <Link
+                  href="/anubhavv"
+                  className="inline-flex items-center justify-center gap-2 bg-[#007085] hover:bg-[#005c6d] text-white text-sm sm:text-base font-bold px-6 py-3.5 rounded-xl shadow transition"
+                >
+                  Explore Hall & Seats <ArrowRight className="w-4 h-4" />
+                </Link>
+                <span className="text-xs sm:text-sm font-medium text-slate-500 text-center sm:text-right">
+                  Sadashiv Peth Facility
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Card 2 — Study Space */}
-          <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-slate-100 flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-[#e6f7fa] text-[#0090b0] flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Building2 className="w-6 h-6" />
+          {/* Side Stacked Cards: Consultation & Sponsorship (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col gap-6">
+            {/* Top Side Card: 1-on-1 Consultation */}
+            <div className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col justify-between group">
+              <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900">
+                <Image
+                  src="/images/slide2.jpg"
+                  alt="Exam Consultation"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="bg-[#007085] text-white text-xs font-bold px-3 py-1 rounded-lg shadow">
+                    MENTORSHIP
+                  </span>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#0090b0] transition">
-                ANUBHAVV Study Space
-              </h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                ANUBHAVV Abhyasika is a dedicated 24x7 study hall located in Sadashiv Peth, Pune. Features individual seats, high-speed WiFi, HD CCTV security, and a disciplined peer community.
-              </p>
-            </div>
-            <div className="pt-6 border-t border-slate-100 mt-6">
-              <Link
-                href="/anubhavv"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0090b0] hover:text-[#007085] transition group-hover:translate-x-1"
-              >
-                Explore Study Hall & Seats <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
 
-          {/* Card 3 — Sponsorship */}
-          <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-slate-100 flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-[#e6f7fa] text-[#0090b0] flex items-center justify-center group-hover:scale-110 transition-transform">
-                <HeartHandshake className="w-6 h-6" />
+              <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-4">
+                <div className="space-y-2">
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-[#007085] transition">
+                    1-on-1 Diagnostic Consultation
+                  </h3>
+                  <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                    Exam-specific strategy, syllabus audit, booklist refinement, and personalized timetable planning for UPSC and MPSC aspirants at a nominal fee.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <Link
+                    href="/consultation"
+                    className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-[#007085] hover:text-[#005c6d] transition group-hover:translate-x-1"
+                  >
+                    Book Consultation <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <span className="text-xs sm:text-sm text-slate-500 font-semibold">UPSC / MPSC</span>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#0090b0] transition">
-                Student Seat Sponsorship
-              </h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                We sponsor eligible, hardworking aspirants who cannot afford study hall fees through transparent donor contributions. No deserving student should be stopped by money.
-              </p>
             </div>
-            <div className="pt-6 border-t border-slate-100 mt-6">
-              <Link
-                href="/sponsorship"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0090b0] hover:text-[#007085] transition group-hover:translate-x-1"
-              >
-                Apply or Sponsor a Seat <ArrowRight className="w-4 h-4" />
-              </Link>
+
+            {/* Bottom Side Card: Student Sponsorship */}
+            <div className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col justify-between group">
+              <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900">
+                <Image
+                  src="/images/slide4.jpg"
+                  alt="Student Sponsorship Certificate"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-lg shadow">
+                    FINANCIAL AID
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-4">
+                <div className="space-y-2">
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-[#007085] transition">
+                    Student Seat Sponsorship
+                  </h3>
+                  <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                    Transparent pass-through sponsorship funding study seats for hardworking aspirants from economically weaker backgrounds.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <Link
+                    href="/sponsorship"
+                    className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-[#007085] hover:text-[#005c6d] transition group-hover:translate-x-1"
+                  >
+                    Apply or Sponsor a Seat <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <span className="text-xs sm:text-sm text-slate-500 font-semibold">100% Direct Aid</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -123,63 +197,65 @@ export default function Home() {
       <section className="bg-slate-900 text-white py-20 px-4 sm:px-6 relative overflow-hidden">
         <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
           <Quote className="w-16 h-16 text-[#0090b0] opacity-40 mx-auto" />
-          <blockquote className="text-2xl sm:text-3xl font-serif italic text-slate-100 leading-relaxed">
+          <blockquote className="text-xl sm:text-2xl md:text-3xl font-serif italic text-slate-100 leading-relaxed">
             &ldquo;Every youth who fails not because of lack of merit, but because of lack of a structured environment — is a failure of the system. Jhanvit Foundation exists to fix that.&rdquo;
           </blockquote>
-          <div className="pt-4 border-t border-slate-800 inline-block">
-            <div className="font-bold text-lg text-white">Ganesh Zanjad</div>
-            <div className="text-xs text-slate-400">Founder & Director, Jhanvit Foundation • Ex-Teach For India (Cohort 2023)</div>
+          <div className="pt-4 border-t border-slate-800 inline-block space-y-1">
+            <div className="font-bold text-lg sm:text-xl text-white">Ganesh Zanjad</div>
+            <div className="text-xs sm:text-sm text-slate-300">Founder & Director, Jhanvit Foundation • Ex-Teach For India (Cohort 2023)</div>
           </div>
         </div>
       </section>
 
       {/* Operational Transparency Banner: Jhanvit vs ANUBHAVV */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="bg-cyan-50 border border-cyan-200 rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="space-y-3 max-w-2xl">
-            <h3 className="text-2xl font-bold text-slate-900">
-              Understanding Jhanvit Foundation & ANUBHAVV Impact Labs
-            </h3>
-            <p className="text-slate-700 text-sm leading-relaxed">
-              <strong>Jhanvit Foundation</strong> is a Section 8 Non-Profit organization managing donations, guidance, and student sponsorships. <strong>ANUBHAVV Impact Labs</strong> operates the physical study hall facilities. All donations go directly to Jhanvit&apos;s bank account, and seat fees go to ANUBHAVV&apos;s bank account.
-            </p>
+        <div className="bg-cyan-50/80 border border-cyan-200/80 rounded-3xl p-6 sm:p-10 space-y-4">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-[#007085]">
+            <CheckCircle2 className="w-4 h-4 text-[#007085]" />
+            ORGANISATIONAL GOVERNANCE & FINANCIAL CLARITY
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-            <Link
-              href="/donate"
-              className="bg-[#007085] hover:bg-[#005c6d] text-white font-bold text-xs px-5 py-3 rounded-xl text-center shadow transition"
-            >
-              Donate to Jhanvit
-            </Link>
-            <Link
-              href="/anubhavv"
-              className="bg-[#005c6d] hover:bg-[#004857] text-white font-bold text-xs px-5 py-3 rounded-xl text-center shadow transition"
-            >
-              Book ANUBHAVV Seat
-            </Link>
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+            Understanding Jhanvit Foundation & ANUBHAVV Impact Labs
+          </h3>
+          <p className="text-slate-700 text-base sm:text-lg leading-relaxed max-w-4xl">
+            To ensure complete compliance and financial transparency, our non-profit programs and physical facility operations maintain strict separation:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div className="bg-white p-5 rounded-2xl border border-cyan-100 shadow-sm space-y-1.5">
+              <div className="font-bold text-slate-900 text-base">Jhanvit Foundation (Section 8 NGO)</div>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Manages public donations, student guidance sessions, and 100% verified student seat sponsorships. All donations go directly to Jhanvit&apos;s registered non-profit bank account.
+              </p>
+            </div>
+            <div className="bg-white p-5 rounded-2xl border border-cyan-100 shadow-sm space-y-1.5">
+              <div className="font-bold text-slate-900 text-base">ANUBHAVV Impact Labs (Study Facility)</div>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Operates and maintains the physical 24x7 study hall facility in Sadashiv Peth, covering lease, power, dual-ISP internet, CCTV security, and infrastructure upkeep.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Call To Action Banner */}
-      <section className="bg-[#007085] border-t-2 border-[#006072] text-white py-16 px-4 text-center">
+      <section className="bg-[#007085] border-t-2 border-[#006072] text-white py-16 sm:py-20 px-4 text-center">
         <div className="max-w-3xl mx-auto space-y-6">
-          <h2 className="text-3xl font-extrabold tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
             Ready to Take Control of Your Preparation?
           </h2>
-          <p className="text-slate-100 text-base">
+          <p className="text-slate-100 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
             Visit our study hall in Sadashiv Peth, Pune or book a consultation session today.
           </p>
           <div className="flex flex-wrap justify-center gap-4 pt-2">
             <Link
               href="/consultation"
-              className="bg-white hover:bg-slate-100 text-[#007085] font-extrabold text-sm px-6 py-3.5 rounded-xl shadow transition"
+              className="bg-white hover:bg-slate-100 text-[#007085] font-extrabold text-sm sm:text-base px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl shadow transition"
             >
               Book Guidance Session
             </Link>
             <Link
               href="/anubhavv"
-              className="bg-[#005c6d] hover:bg-[#004857] text-white font-extrabold text-sm px-6 py-3.5 rounded-xl shadow transition border border-white/20"
+              className="bg-[#005c6d] hover:bg-[#004857] text-white font-extrabold text-sm sm:text-base px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl shadow transition border border-white/20"
             >
               Book ANUBHAVV Study Seat
             </Link>

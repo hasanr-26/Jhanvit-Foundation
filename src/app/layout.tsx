@@ -18,10 +18,10 @@ export const metadata: Metadata = {
     "Jhanvit Foundation provides competitive exam guidance, UPSC/MPSC consultation, structured study space access at ANUBHAVV, and student seat sponsorship in Sadashiv Peth, Pune.",
   icons: {
     icon: [
-      { url: "/images/jhanvit_logo.png", type: "image/png" },
+      { url: "/images/jhanvit_emblem.png", type: "image/png" },
     ],
-    shortcut: "/images/jhanvit_logo.png",
-    apple: "/images/jhanvit_logo.png",
+    shortcut: "/images/jhanvit_emblem.png",
+    apple: "/images/jhanvit_emblem.png",
   },
 };
 
