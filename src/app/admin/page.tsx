@@ -71,7 +71,7 @@ function NavItem({
       <span className="flex-1">{label}</span>
       {count !== undefined && (
         <span
-          className={`text-[11px] font-bold px-1.5 py-0.5 rounded-md min-w-[22px] text-center ${
+          className={`text-xs font-bold px-1.5 py-0.5 rounded-md min-w-[22px] text-center ${
             active ? 'bg-white/20 text-white' : 'bg-white/5 text-slate-500'
           }`}
         >
@@ -86,10 +86,10 @@ function NavItem({
 function Badge({ text }: { text: string }) {
   const lower = text.toLowerCase();
   if (lower.includes('paid') || lower.includes('confirmed') || lower.includes('approved'))
-    return <span className="bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-1 rounded-lg text-[11px]">{text}</span>;
+    return <span className="bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-1 rounded-lg text-xs">{text}</span>;
   if (lower.includes('pending') || lower.includes('review'))
-    return <span className="bg-amber-100 text-amber-800 font-semibold px-2.5 py-1 rounded-lg text-[11px]">{text}</span>;
-  return <span className="bg-slate-100 text-slate-700 font-semibold px-2.5 py-1 rounded-lg text-[11px]">{text}</span>;
+    return <span className="bg-amber-100 text-amber-800 font-semibold px-2.5 py-1 rounded-lg text-xs">{text}</span>;
+  return <span className="bg-slate-100 text-slate-700 font-semibold px-2.5 py-1 rounded-lg text-xs">{text}</span>;
 }
 
 // ─── Export Helper ───────────────────────────────────────────────────────────────
@@ -278,12 +278,12 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
             height={60}
             className="object-contain h-12 w-auto"
           />
-          <p className="text-[10px] text-slate-600 mt-1 font-semibold uppercase tracking-widest">Admin Panel</p>
+          <p className="text-xs text-slate-600 mt-1 font-semibold uppercase tracking-widest">Admin Panel</p>
         </div>
 
         {/* Nav */}
         <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
-          <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest px-3 py-2">Submissions</p>
+          <p className="text-xs font-bold text-slate-600 uppercase tracking-widest px-3 py-2">Submissions</p>
           {tabs.slice(0, 4).map((tab) => (
             <NavItem
               key={tab.id}
@@ -297,7 +297,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           ))}
 
           <div className="pt-3 mt-3 border-t border-white/5">
-            <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest px-3 py-2">Settings</p>
+            <p className="text-xs font-bold text-slate-600 uppercase tracking-widest px-3 py-2">Settings</p>
             <NavItem
               icon={<PencilRuler className="w-4 h-4" />}
               label="Edit Site Content"
@@ -364,7 +364,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                     <thead className="border-b border-white/5">
                       <tr>
                         {['ID', 'Name', 'Phone / Email', 'Exam & Stage', 'Preferred Slot', 'Status'].map((h) => (
-                          <th key={h} className="px-5 py-3.5 text-left text-[11px] font-bold text-slate-500 uppercase tracking-wide">{h}</th>
+                          <th key={h} className="px-5 py-3.5 text-left text-xs font-bold text-slate-500 uppercase tracking-wide">{h}</th>
                         ))}
                       </tr>
                     </thead>
@@ -390,7 +390,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                     <thead className="border-b border-white/5">
                       <tr>
                         {['ID', 'Name', 'Phone / Email', 'Seat & Exam', 'Amount Paid', 'Status'].map((h) => (
-                          <th key={h} className="px-5 py-3.5 text-left text-[11px] font-bold text-slate-500 uppercase tracking-wide">{h}</th>
+                          <th key={h} className="px-5 py-3.5 text-left text-xs font-bold text-slate-500 uppercase tracking-wide">{h}</th>
                         ))}
                       </tr>
                     </thead>
@@ -416,7 +416,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                     <thead className="border-b border-white/5">
                       <tr>
                         {['ID', 'Applicant', 'Phone / Email', 'Exam & Income', 'Date', 'Status'].map((h) => (
-                          <th key={h} className="px-5 py-3.5 text-left text-[11px] font-bold text-slate-500 uppercase tracking-wide">{h}</th>
+                          <th key={h} className="px-5 py-3.5 text-left text-xs font-bold text-slate-500 uppercase tracking-wide">{h}</th>
                         ))}
                       </tr>
                     </thead>
@@ -442,7 +442,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                     <thead className="border-b border-white/5">
                       <tr>
                         {['ID', 'Name', 'Role', 'Phone / Email', 'Message', 'Date'].map((h) => (
-                          <th key={h} className="px-5 py-3.5 text-left text-[11px] font-bold text-slate-500 uppercase tracking-wide">{h}</th>
+                          <th key={h} className="px-5 py-3.5 text-left text-xs font-bold text-slate-500 uppercase tracking-wide">{h}</th>
                         ))}
                       </tr>
                     </thead>

@@ -1,58 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import InteractiveFloorPlan from '@/components/InteractiveFloorPlan';
 import {
   Clock,
   MapPin,
   CheckCircle,
-  Sparkles,
-  QrCode,
-  CreditCard,
   Building,
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 export default function AnubhavvPage() {
-  const [selectedSeat, setSelectedSeat] = useState<number | null>(null);
-  const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: '',
-    phone: '',
-    email: '',
-    exam: 'UPSC',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [bookingSuccess, setBookingSuccess] = useState(false);
-
-  // Generate 120 seat layout. Make ~25 seats occupied (grey) for realism, rest green available.
-  const occupiedSeats = [3, 4, 11, 12, 18, 25, 26, 31, 32, 40, 41, 55, 56, 62, 70, 71, 85, 90, 102, 110];
-
-  const handleSeatClick = (seatNum: number) => {
-    if (occupiedSeats.includes(seatNum)) return;
-    setSelectedSeat(seatNum);
-    setShowModal(true);
-  };
-
-  const handleSubmitBooking = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate Razorpay payment trigger & Supabase record
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setBookingSuccess(true);
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-      });
-    }, 1500);
-  };
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
@@ -68,99 +30,33 @@ export default function AnubhavvPage() {
         </div>
       </section>
 
-      {/* Pricing & Deposit Card */}
-      <section className="pt-12 sm:pt-16 pb-6 px-4 sm:px-6 max-w-5xl mx-auto w-full">
-        <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-700 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <span className="text-xs font-bold uppercase tracking-wider text-cyan-300">Monthly Seat Fee</span>
-            <div className="flex items-baseline justify-center md:justify-start gap-2">
-              <span className="text-4xl sm:text-5xl font-black text-white">₹2,000</span>
-              <span className="text-slate-400 text-base">/ month</span>
+      {/* Seat Selection & Floor Plan Section */}
+      <section id="seat-map" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <div className="space-y-6">
+          <div className="text-center max-w-3xl mx-auto space-y-2 mb-4">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-50 text-[#0090b0] text-xs sm:text-sm font-bold border border-cyan-200">
+              SEAT PRICING & LIVE AVAILABILITY
             </div>
-            <p className="text-sm text-slate-300">+ ₹200 one-time refundable security deposit</p>
-            <p className="text-xs text-amber-300 font-medium">Payment credited to: ANUBHAVV Impact Labs account</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Pick Your Study Desk
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base">
+              Choose a seat tier below for instant auto-selection, or click any seat directly on the 24x7 floor plan.
+            </p>
           </div>
 
-          <a
-            href="#seat-map"
-            className="w-full md:w-auto bg-[#007085] hover:bg-[#005c6d] text-white font-extrabold px-8 py-4 rounded-xl shadow-lg transition text-base flex items-center justify-center gap-2"
-          >
-            <Sparkles className="w-5 h-5 text-cyan-200" />
-            Select Your Seat Below
-          </a>
-        </div>
-      </section>
-
-      {/* Interactive Seat Layout Visualiser */}
-      <section id="seat-map" className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-slate-200 space-y-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-6">
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900">Interactive Seat Layout</h3>
-              <p className="text-sm text-slate-500 mt-1">Select an available green seat to book your slot immediately.</p>
-            </div>
-            <div className="flex items-center gap-4 text-xs sm:text-sm font-bold">
-              <span className="flex items-center gap-1.5">
-                <span className="w-3.5 h-3.5 rounded-full bg-emerald-500 inline-block"></span> Green = Available
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-3.5 h-3.5 rounded-full bg-slate-300 inline-block"></span> Grey = Occupied
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-3.5 h-3.5 rounded-full bg-[#007085] inline-block"></span> Teal = Selected
-              </span>
-            </div>
-          </div>
-
-          {/* Seat Grid */}
-          <div className="grid grid-cols-6 sm:grid-cols-10 md:grid-cols-12 gap-2.5 max-h-[480px] overflow-y-auto p-2">
-            {Array.from({ length: 120 }).map((_, index) => {
-              const seatNum = index + 1;
-              const isOccupied = occupiedSeats.includes(seatNum);
-              const isSelected = selectedSeat === seatNum;
-
-              return (
-                <button
-                  key={seatNum}
-                  onClick={() => handleSeatClick(seatNum)}
-                  disabled={isOccupied}
-                  className={`h-11 rounded-lg text-xs font-bold flex flex-col items-center justify-center transition-all ${isOccupied
-                      ? 'bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-200'
-                      : isSelected
-                        ? 'bg-[#007085] text-white shadow-md scale-105 ring-2 ring-cyan-300'
-                        : 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-sm hover:scale-105'
-                    }`}
-                >
-                  <span>S-{seatNum}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {selectedSeat && (
-            <div className="bg-cyan-50 border border-cyan-200 p-4 rounded-xl flex justify-between items-center">
-              <span className="text-sm font-bold text-[#007085]">
-                Selected Seat: <span className="text-lg font-extrabold">Seat S-{selectedSeat}</span>
-              </span>
-              <button
-                onClick={() => setShowModal(true)}
-                className="bg-[#007085] hover:bg-[#005c6d] text-white font-bold text-sm px-6 py-2.5 rounded-xl shadow transition"
-              >
-                Proceed to Book S-{selectedSeat}
-              </button>
-            </div>
-          )}
+          <InteractiveFloorPlan />
         </div>
       </section>
 
       {/* Operational Partnership & Entity Disclosure */}
       <section className="py-6 px-4 sm:px-6 max-w-7xl mx-auto w-full">
         <div className="bg-cyan-50/80 border border-cyan-200/80 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-4 text-slate-800">
-          <div className="w-12 h-12 rounded-xl bg-[#007085] text-white flex items-center justify-center flex-shrink-0">
+          <div className="w-12 h-12 rounded-xl bg-[#0090b0] text-white flex items-center justify-center flex-shrink-0">
             <Building className="w-6 h-6" />
           </div>
           <div className="space-y-1 text-sm">
-            <h4 className="font-bold text-[#007085]">Entity Operational Clarification</h4>
+            <h4 className="font-bold text-[#0090b0]">Entity Operational Clarification</h4>
             <p className="text-slate-700">
               <strong>ANUBHAVV Abhyasika</strong> is operated by <strong>ANUBHAVV Impact Labs</strong> (for-profit entity). Jhanvit Foundation (Section 8 NGO) provides mentorship, guidance & sponsorship programs. Seat fees are credited directly to ANUBHAVV Impact Labs account.
             </p>
@@ -444,138 +340,6 @@ export default function AnubhavvPage() {
           </div>
         </div>
       </section>
-
-      {/* Seat Booking Modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative animate-fadeIn space-y-6">
-            <button
-              onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg font-bold"
-            >
-              ✕
-            </button>
-
-            {!bookingSuccess ? (
-              <>
-                <div className="space-y-1">
-                  <span className="text-xs font-bold text-[#007085] uppercase tracking-wider">ANUBHAVV Seat Booking</span>
-                  <h3 className="text-2xl font-bold text-slate-900">
-                    Book Seat {selectedSeat ? `S-${selectedSeat}` : ''}
-                  </h3>
-                  <p className="text-sm text-slate-500">First month fee: ₹2,000 + ₹200 deposit = ₹2,200</p>
-                </div>
-
-                <form onSubmit={handleSubmitBooking} className="space-y-4">
-                  <div>
-                    <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">Full Name *</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Rahul Sharma"
-                      value={formData.fullName}
-                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#007085] focus:outline-none"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">Phone Number *</label>
-                      <input
-                        type="tel"
-                        required
-                        placeholder="e.g. 9876543210"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#007085] focus:outline-none"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">Email Address *</label>
-                      <input
-                        type="email"
-                        required
-                        placeholder="rahul@gmail.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#007085] focus:outline-none"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">Exam Target *</label>
-                    <select
-                      value={formData.exam}
-                      onChange={(e) => setFormData({ ...formData, exam: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-[#007085] focus:outline-none bg-white"
-                    >
-                      <option value="UPSC">UPSC Civil Services</option>
-                      <option value="MPSC">MPSC Rajyaseva / Combined</option>
-                      <option value="Banking">Banking (IBPS / SBI)</option>
-                      <option value="SSC">SSC CGL / CHSL</option>
-                      <option value="Other">Other Competitive Exam</option>
-                    </select>
-                  </div>
-
-                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-600 space-y-1.5">
-                    <div className="flex justify-between">
-                      <span>Seat Monthly Fee:</span>
-                      <span className="font-bold text-slate-800">₹2,000</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Refundable Deposit:</span>
-                      <span className="font-bold text-slate-800">₹200</span>
-                    </div>
-                    <div className="flex justify-between border-t border-slate-200 pt-1.5 font-bold text-slate-900 text-base">
-                      <span>Total Payable:</span>
-                      <span className="text-[#007085]">₹2,200</span>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-[#007085] hover:bg-[#005c6d] text-white font-bold py-3.5 rounded-xl shadow-lg transition text-sm sm:text-base flex items-center justify-center gap-2"
-                  >
-                    {isSubmitting ? (
-                      'Processing Razorpay Payment...'
-                    ) : (
-                      <>
-                        <CreditCard className="w-4 h-4" /> Pay ₹2,200 & Confirm Seat S-{selectedSeat}
-                      </>
-                    )}
-                  </button>
-                </form>
-              </>
-            ) : (
-              <div className="text-center py-6 space-y-4">
-                <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
-                  <CheckCircle className="w-10 h-10" />
-                </div>
-                <h3 className="text-2xl font-extrabold text-slate-900">Seat Booking Confirmed!</h3>
-                <p className="text-xs text-slate-600">
-                  Congratulations {formData.fullName}! Seat <strong>S-{selectedSeat}</strong> has been allocated to you. Digital Student ID and QR Code sent to WhatsApp <strong>{formData.phone}</strong>.
-                </p>
-                <div className="bg-slate-100 p-4 rounded-2xl inline-block">
-                  <QrCode className="w-24 h-24 mx-auto text-slate-800" />
-                  <span className="text-[10px] font-mono text-slate-500 block mt-1">ID: ANUBHAVV-2026-S{selectedSeat}</span>
-                </div>
-                <button
-                  onClick={() => {
-                    setShowModal(false);
-                    setBookingSuccess(false);
-                  }}
-                  className="w-full bg-slate-900 text-white text-xs font-bold py-3 rounded-xl"
-                >
-                  Close & Done
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
 
       <Footer />
       <WhatsAppButton />

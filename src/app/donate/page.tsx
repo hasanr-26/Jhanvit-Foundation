@@ -103,7 +103,7 @@ export default function DonatePage() {
               }`}
             >
               {preset.popular && (
-                <span className="absolute -top-3 right-4 bg-[#007085] text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
+                <span className="absolute -top-3 right-4 bg-[#007085] text-white text-xs font-extrabold px-2.5 py-0.5 rounded-full uppercase">
                   Most Popular
                 </span>
               )}
@@ -308,7 +308,7 @@ export default function DonatePage() {
                 <div className="w-36 h-36 bg-white rounded-2xl mx-auto p-3 shadow-md flex items-center justify-center border-2 border-[#0090b0]">
                   <QrCode className="w-full h-full text-slate-900" />
                 </div>
-                <span className="text-[10px] text-slate-400 mt-2 block">Scan with GPay, PhonePe, Paytm or BHIM</span>
+                <span className="text-xs text-slate-400 mt-2 block">Scan with GPay, PhonePe, Paytm or BHIM</span>
               </div>
             </div>
 

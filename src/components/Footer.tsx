@@ -126,7 +126,7 @@ export default function Footer() {
               <ShieldCheck className="w-5 h-5 text-[#0090b0]" />
               <h4 className="text-sm font-bold text-white">Transparency Notice</h4>
             </div>
-            <p className="text-[11px] text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-300 leading-relaxed">
               Jhanvit Foundation (Section 8 Non-Profit) provides guidance and sponsors seats. ANUBHAVV Impact Labs (For-Profit) operates the study hall. Bank details for donations and seat fees are strictly separated.
             </p>
             <Link

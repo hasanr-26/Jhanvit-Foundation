@@ -35,7 +35,7 @@ function FieldLabel({ label, hint }: { label: string; hint?: string }) {
   return (
     <div className="mb-1">
       <label className="block text-xs font-semibold text-slate-400">{label}</label>
-      {hint && <p className="text-[11px] text-slate-600 mt-0.5">{hint}</p>}
+      {hint && <p className="text-xs text-slate-600 mt-0.5">{hint}</p>}
     </div>
   );
 }
@@ -113,7 +113,7 @@ function SectionCard({
       <div className="p-5 space-y-4">
         {children}
         <div className="pt-2 flex items-center justify-between gap-3 border-t border-white/5">
-          <p className="text-[11px] text-slate-500 flex items-center gap-1">
+          <p className="text-xs text-slate-500 flex items-center gap-1">
             <Info className="w-3 h-3" /> Changes go live immediately on the website.
           </p>
           <button
@@ -399,7 +399,7 @@ export default function SiteContentEditor() {
         onSave={() => handleSave('presets')}
         savedSection={savedSection}
       >
-        <p className="text-[11px] text-slate-400 bg-amber-900/20 border border-amber-800/40 rounded-xl px-3 py-2 flex gap-2 items-start">
+        <p className="text-xs text-slate-400 bg-amber-900/20 border border-amber-800/40 rounded-xl px-3 py-2 flex gap-2 items-start">
           <AlertTriangle className="w-3.5 h-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
           These 4 tiers appear as clickable cards on the Donate page. The "Popular" badge is shown on the tier you mark as popular.
         </p>
@@ -417,7 +417,7 @@ export default function SiteContentEditor() {
                     onChange={(e) => updatePreset(i, 'popular', e.target.checked)}
                     className="w-3.5 h-3.5 accent-[#0090b0]"
                   />
-                  <span className="text-[11px] font-semibold text-slate-400">Most Popular Badge</span>
+                  <span className="text-xs font-semibold text-slate-400">Most Popular Badge</span>
                 </label>
               </div>
               <div className="grid grid-cols-2 gap-3">
@@ -465,7 +465,7 @@ export default function SiteContentEditor() {
         onSave={() => handleSave('bank')}
         savedSection={savedSection}
       >
-        <p className="text-[11px] text-slate-400 bg-[#0090b0]/10 border border-[#0090b0]/20 rounded-xl px-3 py-2">
+        <p className="text-xs text-slate-400 bg-[#0090b0]/10 border border-[#0090b0]/20 rounded-xl px-3 py-2">
           These appear on the Donate page under &quot;Direct Bank Transfer&quot;. Keep these accurate and up to date.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

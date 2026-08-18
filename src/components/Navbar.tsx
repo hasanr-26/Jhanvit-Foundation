@@ -40,7 +40,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-5">
             <span className="flex items-center gap-1.5 font-semibold text-xs">
-              <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded border border-white/20">
+              <span className="bg-white/20 text-white text-xs font-bold px-2 py-0.5 rounded border border-white/20">
                 SECTION 8 NON-PROFIT
               </span>
               CIN: U85499PN2026NPL255094
@@ -84,7 +84,7 @@ export default function Navbar() {
                 <span className="text-white font-extrabold text-xl sm:text-2xl md:text-[26px] tracking-[0.12em] leading-none uppercase drop-shadow-sm">
                   JHANVIT
                 </span>
-                <span className="text-cyan-100 font-bold text-[10px] sm:text-xs md:text-[13px] tracking-[0.24em] leading-none uppercase mt-1">
+                <span className="text-cyan-100 font-bold text-xs md:text-[13px] tracking-[0.24em] leading-none uppercase mt-1">
                   FOUNDATION
                 </span>
               </div>
