@@ -118,6 +118,55 @@ const compressImageClientSide = (file: File): Promise<string> => {
   });
 };
 
+// Helper to parse ISO string "YYYY-MM-DDTHH:mm" into Date, Hour, Minute, and AM/PM
+const parseScheduledDateTime = (isoString?: string) => {
+  if (!isoString) {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const dateStr = tomorrow.toISOString().split('T')[0];
+    return {
+      date: dateStr,
+      hour: '10',
+      minute: '00',
+      period: 'AM',
+    };
+  }
+
+  try {
+    const [datePart, timePart] = isoString.split('T');
+    if (!timePart) {
+      return { date: datePart || new Date().toISOString().split('T')[0], hour: '10', minute: '00', period: 'AM' };
+    }
+    const [hStr, mStr] = timePart.split(':');
+    let hNum = parseInt(hStr, 10) || 0;
+    const period = hNum >= 12 ? 'PM' : 'AM';
+    let h12 = hNum % 12;
+    if (h12 === 0) h12 = 12;
+    const minute = mStr ? mStr.padStart(2, '0') : '00';
+    return {
+      date: datePart,
+      hour: String(h12),
+      minute: minute,
+      period,
+    };
+  } catch {
+    return { date: new Date().toISOString().split('T')[0], hour: '10', minute: '00', period: 'AM' };
+  }
+};
+
+// Helper to format Date, Hour, Minute, and AM/PM into ISO format "YYYY-MM-DDTHH:mm"
+const formatScheduledDateTime = (date: string, hour12: string, minute: string, period: string) => {
+  let hNum = parseInt(hour12, 10) || 12;
+  if (period === 'AM') {
+    if (hNum === 12) hNum = 0;
+  } else {
+    if (hNum !== 12) hNum += 12;
+  }
+  const h24 = String(hNum).padStart(2, '0');
+  const m2 = String(minute).padStart(2, '0');
+  return `${date}T${h24}:${m2}`;
+};
+
 export default function BlogEditor() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -743,7 +792,16 @@ export default function BlogEditor() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setEditingPost({ ...editingPost, status: 'scheduled' })}
+                    onClick={() => {
+                      const tomorrow = new Date();
+                      tomorrow.setDate(tomorrow.getDate() + 1);
+                      const defaultDateStr = tomorrow.toISOString().split('T')[0];
+                      setEditingPost({
+                        ...editingPost,
+                        status: 'scheduled',
+                        scheduledAt: editingPost.scheduledAt || `${defaultDateStr}T10:00`,
+                      });
+                    }}
                     className={`py-1.5 rounded-lg font-semibold transition ${
                       editingPost.status === 'scheduled'
                         ? 'bg-purple-600 text-white shadow'
@@ -765,24 +823,126 @@ export default function BlogEditor() {
                   </button>
                 </div>
 
-                {/* If Scheduled: Show DateTime Picker */}
-                {editingPost.status === 'scheduled' && (
-                  <div className="space-y-2 pt-2 border-t border-white/10 animate-fadeIn">
-                    <label className="block text-[11px] font-semibold text-purple-300">
-                      Release Date & Time:
-                    </label>
-                    <input
-                      type="datetime-local"
-                      required
-                      value={editingPost.scheduledAt || ''}
-                      onChange={(e) => setEditingPost({ ...editingPost, scheduledAt: e.target.value })}
-                      className="w-full px-3 py-2 bg-black/30 border border-purple-500/40 rounded-xl text-white text-xs focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                    />
-                    <p className="text-[10px] text-purple-300/80 leading-tight">
-                      ⏰ The article will stay hidden from the public and will automatically go live when this time arrives.
-                    </p>
-                  </div>
-                )}
+                {/* If Scheduled: Show Date Picker & Time Dropdowns */}
+                {editingPost.status === 'scheduled' && (() => {
+                  const { date, hour, minute, period } = parseScheduledDateTime(editingPost.scheduledAt);
+
+                  const updateSchedule = (newDate: string, newHour: string, newMinute: string, newPeriod: string) => {
+                    const formatted = formatScheduledDateTime(newDate, newHour, newMinute, newPeriod);
+                    setEditingPost({ ...editingPost, scheduledAt: formatted });
+                  };
+
+                  const formattedDisplay = (() => {
+                    try {
+                      if (!editingPost.scheduledAt) return null;
+                      const d = new Date(editingPost.scheduledAt);
+                      if (isNaN(d.getTime())) return null;
+                      return (
+                        d.toLocaleDateString(undefined, {
+                          weekday: 'short',
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric',
+                        }) +
+                        ' at ' +
+                        d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit', hour12: true })
+                      );
+                    } catch {
+                      return null;
+                    }
+                  })();
+
+                  return (
+                    <div className="space-y-3 pt-3 border-t border-purple-800/40 bg-purple-950/40 p-3.5 rounded-xl border border-purple-800/60 animate-fadeIn">
+                      <label className="block text-xs font-bold text-purple-200 flex items-center gap-1.5">
+                        <Clock className="w-3.5 h-3.5 text-purple-400" />
+                        Release Date & Time
+                      </label>
+
+                      {/* Release Date Input */}
+                      <div>
+                        <label className="block text-[11px] text-purple-300 font-medium mb-1">
+                          Release Date:
+                        </label>
+                        <input
+                          type="date"
+                          required
+                          min={new Date().toISOString().split('T')[0]}
+                          value={date}
+                          onChange={(e) => updateSchedule(e.target.value, hour, minute, period)}
+                          className="w-full px-3 py-2 bg-black/50 border border-purple-500/40 rounded-xl text-white text-xs focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                        />
+                      </div>
+
+                      {/* Release Time Dropdowns: Hour, Minute, AM/PM */}
+                      <div>
+                        <label className="block text-[11px] text-purple-300 font-medium mb-1">
+                          Release Time:
+                        </label>
+                        <div className="grid grid-cols-3 gap-2">
+                          {/* Hour Dropdown */}
+                          <div>
+                            <span className="block text-[10px] text-purple-400 mb-0.5">Hour</span>
+                            <select
+                              value={hour}
+                              onChange={(e) => updateSchedule(date, e.target.value, minute, period)}
+                              className="w-full px-2.5 py-2 bg-[#0d1420] border border-purple-500/40 rounded-xl text-white text-xs font-semibold focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                            >
+                              {Array.from({ length: 12 }, (_, i) => String(i + 1)).map((h) => (
+                                <option key={h} value={h} className="bg-[#0d1420] text-white">
+                                  {h}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          {/* Minute Dropdown */}
+                          <div>
+                            <span className="block text-[10px] text-purple-400 mb-0.5">Minute</span>
+                            <select
+                              value={minute}
+                              onChange={(e) => updateSchedule(date, hour, e.target.value, period)}
+                              className="w-full px-2.5 py-2 bg-[#0d1420] border border-purple-500/40 rounded-xl text-white text-xs font-semibold focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                            >
+                              {['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55'].map((m) => (
+                                <option key={m} value={m} className="bg-[#0d1420] text-white">
+                                  :{m}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          {/* AM / PM Dropdown */}
+                          <div>
+                            <span className="block text-[10px] text-purple-400 mb-0.5">AM / PM</span>
+                            <select
+                              value={period}
+                              onChange={(e) => updateSchedule(date, hour, minute, e.target.value)}
+                              className="w-full px-2.5 py-2 bg-[#0d1420] border border-purple-500/40 rounded-xl text-purple-300 font-bold text-xs focus:ring-2 focus:ring-purple-500 focus:outline-none cursor-pointer"
+                            >
+                              <option value="AM" className="bg-[#0d1420] text-white font-bold">
+                                AM
+                              </option>
+                              <option value="PM" className="bg-[#0d1420] text-white font-bold">
+                                PM
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Live Date Preview */}
+                      {formattedDisplay && (
+                        <div className="bg-purple-900/50 border border-purple-700/60 px-3 py-2 rounded-xl text-[11px] text-purple-200 flex items-center gap-1.5">
+                          <CalendarDays className="w-3.5 h-3.5 text-purple-300 shrink-0" />
+                          <span>
+                            <b>Goes live on:</b> {formattedDisplay}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
 
                 {/* Featured Checkbox */}
                 <div className="flex items-center justify-between pt-2 border-t border-white/10">
