@@ -193,6 +193,139 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Knowledge Hub & Blog Section */}
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-50 text-[#007085] text-xs font-bold border border-cyan-200">
+              KNOWLEDGE & ASPIRANT INSIGHTS
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Latest from the Jhanvit Blog
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base max-w-2xl">
+              Strategic blueprints for UPSC/MPSC aspirants, deep dives into technology & governance, and inspiring stories of educational equality.
+            </p>
+          </div>
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-sm font-bold text-[#007085] hover:text-[#005261] transition group shrink-0"
+          >
+            Explore all articles <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {/* Card 1 */}
+          <Link
+            href="/blog/digital-twin-technology-the-future-of-engineering"
+            className="bg-white rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
+          >
+            <div className="relative h-48 w-full overflow-hidden bg-slate-900">
+              <Image
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80"
+                alt="Digital Twin Technology"
+                fill
+                unoptimized
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute top-3 left-3">
+                <span className="bg-[#007085] text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">
+                  Technology & Innovation
+                </span>
+              </div>
+            </div>
+            <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+              <div className="space-y-2">
+                <span className="text-xs text-slate-400 font-medium">6 min read • Aug 18, 2026</span>
+                <h4 className="font-bold text-slate-900 text-base group-hover:text-[#007085] transition line-clamp-2 leading-snug">
+                  Digital Twin Technology: The Future of Engineering & Smart Infrastructure
+                </h4>
+                <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                  How virtual simulations and real-time AI sensors revolutionize modern civil engineering and public governance.
+                </p>
+              </div>
+              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#007085]">
+                <span>Read Full Guide</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </div>
+          </Link>
+
+          {/* Card 2 */}
+          <Link
+            href="/blog/the-modern-aspirants-blueprint-upsc-mpsc-pune"
+            className="bg-white rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
+          >
+            <div className="relative h-48 w-full overflow-hidden bg-slate-900">
+              <Image
+                src="https://images.unsplash.com/photo-1532012164546-f432f2e3edd4?auto=format&fit=crop&w=800&q=80"
+                alt="Modern Aspirant Blueprint"
+                fill
+                unoptimized
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute top-3 left-3">
+                <span className="bg-[#007085] text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">
+                  Exam Strategy
+                </span>
+              </div>
+            </div>
+            <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+              <div className="space-y-2">
+                <span className="text-xs text-slate-400 font-medium">8 min read • Aug 10, 2026</span>
+                <h4 className="font-bold text-slate-900 text-base group-hover:text-[#007085] transition line-clamp-2 leading-snug">
+                  The Modern Aspirant&apos;s Blueprint: Mastering UPSC & MPSC in Pune
+                </h4>
+                <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                  Building sustained 12-hour focus routines, active recall techniques, and leveraging 24x7 Abhyasika culture.
+                </p>
+              </div>
+              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#007085]">
+                <span>Read Full Guide</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </div>
+          </Link>
+
+          {/* Card 3 */}
+          <Link
+            href="/blog/bridging-the-opportunity-gap-community-sponsorship"
+            className="bg-white rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
+          >
+            <div className="relative h-48 w-full overflow-hidden bg-slate-900">
+              <Image
+                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80"
+                alt="Community Sponsorship"
+                fill
+                unoptimized
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute top-3 left-3">
+                <span className="bg-[#007085] text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">
+                  Social Impact
+                </span>
+              </div>
+            </div>
+            <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+              <div className="space-y-2">
+                <span className="text-xs text-slate-400 font-medium">5 min read • Jul 28, 2026</span>
+                <h4 className="font-bold text-slate-900 text-base group-hover:text-[#007085] transition line-clamp-2 leading-snug">
+                  Bridging the Opportunity Gap: How Seat Sponsorship Empowers Aspirants
+                </h4>
+                <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                  Real stories of students from rural Maharashtra clearing critical hurdles through direct donor seat sponsorship.
+                </p>
+              </div>
+              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#007085]">
+                <span>Read Full Guide</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </div>
+          </Link>
+        </div>
+      </section>
+
       {/* Founder Mission Statement Quote */}
       <section className="bg-slate-900 text-white py-20 px-4 sm:px-6 relative overflow-hidden">
         <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">

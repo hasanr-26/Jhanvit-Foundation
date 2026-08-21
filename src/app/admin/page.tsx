@@ -1,9 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import SiteContentEditor from './SiteContentEditor';
+import BlogEditor from './BlogEditor';
+import { getBlogPosts } from '@/lib/blogData';
 import {
   Lock,
   Eye,
@@ -18,10 +20,11 @@ import {
   LayoutDashboard,
   ChevronRight,
   ArrowUpRight,
+  FileText,
 } from 'lucide-react';
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
-type Tab = 'consultations' | 'seats' | 'sponsorships' | 'contacts' | 'site-content';
+type Tab = 'consultations' | 'seats' | 'sponsorships' | 'contacts' | 'blog' | 'site-content';
 
 // ─── Sample Data ────────────────────────────────────────────────────────────────
 const CONSULTATIONS = [
@@ -246,12 +249,18 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
 // ─── Dashboard ───────────────────────────────────────────────────────────────────
 function Dashboard({ onLogout }: { onLogout: () => void }) {
   const [activeTab, setActiveTab] = useState<Tab>('consultations');
+  const [blogCount, setBlogCount] = useState(0);
+
+  useEffect(() => {
+    setBlogCount(getBlogPosts().length);
+  }, [activeTab]);
 
   const tabs: { id: Tab; label: string; icon: React.ReactNode; count?: number; accent: string }[] = [
     { id: 'consultations', label: 'Consultations', icon: <BookOpen className="w-4 h-4" />, count: CONSULTATIONS.length, accent: 'bg-[#0090b0]' },
     { id: 'seats', label: 'Seat Bookings', icon: <Building2 className="w-4 h-4" />, count: SEATS.length, accent: 'bg-[#801800]' },
     { id: 'sponsorships', label: 'Sponsorships', icon: <HeartHandshake className="w-4 h-4" />, count: SPONSORSHIPS.length, accent: 'bg-amber-600' },
     { id: 'contacts', label: 'Messages', icon: <MessageSquare className="w-4 h-4" />, count: MESSAGES.length, accent: 'bg-slate-600' },
+    { id: 'blog', label: 'Blog & Articles', icon: <FileText className="w-4 h-4" />, count: blogCount, accent: 'bg-[#007085]' },
     { id: 'site-content', label: 'Edit Site Content', icon: <PencilRuler className="w-4 h-4" />, accent: 'bg-[#f5b82e]' },
   ];
 
@@ -297,6 +306,18 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           ))}
 
           <div className="pt-3 mt-3 border-t border-white/5">
+            <p className="text-xs font-bold text-slate-600 uppercase tracking-widest px-3 py-2">Content & Media</p>
+            <NavItem
+              icon={<FileText className="w-4 h-4" />}
+              label="Blog & Articles"
+              count={blogCount}
+              active={activeTab === 'blog'}
+              accent="bg-[#007085] text-white shadow-md"
+              onClick={() => setActiveTab('blog')}
+            />
+          </div>
+
+          <div className="pt-3 mt-3 border-t border-white/5">
             <p className="text-xs font-bold text-slate-600 uppercase tracking-widest px-3 py-2">Settings</p>
             <NavItem
               icon={<PencilRuler className="w-4 h-4" />}
@@ -340,7 +361,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
             <span className="text-white font-semibold">{activeTabInfo.label}</span>
           </div>
 
-          {activeTab !== 'site-content' && (
+          {activeTab !== 'site-content' && activeTab !== 'blog' && (
             <button
               onClick={handleExport}
               className="flex items-center gap-1.5 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 text-xs font-semibold px-3 py-2 rounded-lg transition"
@@ -355,6 +376,8 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
         <div className="flex-1 p-8">
           {activeTab === 'site-content' ? (
             <SiteContentEditor />
+          ) : activeTab === 'blog' ? (
+            <BlogEditor />
           ) : (
             <div className="bg-[#0d1420] rounded-2xl border border-white/5 overflow-hidden">
               {/* Table */}
