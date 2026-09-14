@@ -2,33 +2,46 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import InteractiveFloorPlan from '@/components/InteractiveFloorPlan';
-import {
-  Clock,
-  MapPin,
-  CheckCircle,
-  Building,
-} from 'lucide-react';
+import PillarTabs from '@/components/PillarTabs';
+import ServicesGrid from '@/components/ServicesGrid';
+import { usePageContent } from '@/lib/pageContent';
+import { Clock, MapPin, Building } from 'lucide-react';
 
 export default function AnubhavvPage() {
+  const { anubhavv } = usePageContent();
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
       <Navbar />
 
       {/* Hero Banner */}
-      <section className="bg-[#007085] text-white pt-28 sm:pt-32 pb-16 px-4 sm:px-6 relative overflow-hidden border-b-4 border-[#005e70]">
-        <div className="max-w-7xl mx-auto text-center space-y-4 relative z-10">
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">ANUBHAVV Abhyasika</h1>
-          <p className="max-w-2xl mx-auto text-cyan-50 text-base">
-            Structured study hall for serious aspirants preparing for UPSC, MPSC, Banking & Govt examinations in Sadashiv Peth, Pune.
-          </p>
+      <section className="bg-[#007085] text-white pt-28 sm:pt-32 pb-16 px-4 sm:px-6 border-b-4 border-[#005e70]">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
+          <div className="bg-white rounded-3xl p-5 sm:p-6 shadow-lg shrink-0">
+            <Image
+              src="/images/anubhava_logo.png"
+              alt="ANUBHAVV Abhyasika"
+              width={220}
+              height={220}
+              priority
+              className="h-24 sm:h-32 w-auto object-contain"
+            />
+          </div>
+          <div className="space-y-4 text-center md:text-left">
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">ANUBHAVV Abhyasika</h1>
+            <p className="max-w-2xl text-cyan-50 text-base">
+              Structured study hall for serious aspirants preparing for UPSC, MPSC, Banking &amp; Govt examinations in Sadashiv Peth, Pune.
+            </p>
+          </div>
         </div>
       </section>
+
+      {/* Problem / Solution / Vision / Mission */}
+      <PillarTabs pillars={anubhavv.pillars} />
 
       {/* Seat Selection & Floor Plan Section */}
       <section id="seat-map" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
@@ -64,145 +77,8 @@ export default function AnubhavvPage() {
         </div>
       </section>
 
-      {/* Direct Comparison Matrix: Typical Reading Room vs. ANUBHAVV */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full border-t border-slate-200">
-        <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-50 text-[#007085] text-xs sm:text-sm font-bold border border-cyan-200">
-            SADASHIV PETH FACILITY BENCHMARK
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-            Why ANUBHAVV is Different
-          </h2>
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Most reading halls in Pune are congested and noisy. Here is a direct comparison of what you get at ANUBHAVV versus typical local study rooms.
-          </p>
-        </div>
-
-        {/* Comparison Matrix Table */}
-        <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
-          {/* Table Header */}
-          <div className="grid grid-cols-1 md:grid-cols-12 bg-slate-900 text-white p-4 sm:p-6 items-center gap-4 text-sm sm:text-base font-bold">
-            <div className="md:col-span-4 text-slate-300 uppercase tracking-wider text-xs font-mono">
-              Infrastructure Feature
-            </div>
-            <div className="md:col-span-4 text-slate-400 font-semibold hidden md:block">
-              Typical Pune Reading Room
-            </div>
-            <div className="md:col-span-4 text-cyan-300 font-black flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
-              ANUBHAVV Abhyasika
-            </div>
-          </div>
-
-          {/* Comparison Rows */}
-          <div className="divide-y divide-slate-100 text-sm sm:text-base">
-            {/* Row 1 */}
-            <div className="grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 gap-3 items-center hover:bg-slate-50/80 transition-colors">
-              <div className="md:col-span-4 font-bold text-slate-900">
-                Desk & Privacy
-              </div>
-              <div className="md:col-span-4 text-slate-500 text-sm flex items-start gap-2">
-                <span className="text-rose-500 font-bold shrink-0">✕</span>
-                Shared crowded benches, narrow tables with side distractions.
-              </div>
-              <div className="md:col-span-4 font-semibold text-slate-900 flex items-start gap-2">
-                <span className="text-emerald-600 font-bold shrink-0">✓</span>
-                <span>Individual 2.5ft cubicle with <strong>3-sided wooden acoustic partitions</strong>.</span>
-              </div>
-            </div>
-
-            {/* Row 2 */}
-            <div className="grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 gap-3 items-center bg-slate-50/50 hover:bg-slate-50 transition-colors">
-              <div className="md:col-span-4 font-bold text-slate-900">
-                Internet Connectivity
-              </div>
-              <div className="md:col-span-4 text-slate-500 text-sm flex items-start gap-2">
-                <span className="text-rose-500 font-bold shrink-0">✕</span>
-                Single consumer Wi-Fi, frequent buffering during mock tests.
-              </div>
-              <div className="md:col-span-4 font-semibold text-slate-900 flex items-start gap-2">
-                <span className="text-emerald-600 font-bold shrink-0">✓</span>
-                <span><strong>Dual-ISP 300 Mbps fiber</strong> with automatic instant failover.</span>
-              </div>
-            </div>
-
-            {/* Row 3 */}
-            <div className="grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 gap-3 items-center hover:bg-slate-50/80 transition-colors">
-              <div className="md:col-span-4 font-bold text-slate-900">
-                Charging & Power Matrix
-              </div>
-              <div className="md:col-span-4 text-slate-500 text-sm flex items-start gap-2">
-                <span className="text-rose-500 font-bold shrink-0">✕</span>
-                Shared extension strips, trailing cables, power cut shutdowns.
-              </div>
-              <div className="md:col-span-4 font-semibold text-slate-900 flex items-start gap-2">
-                <span className="text-emerald-600 font-bold shrink-0">✓</span>
-                <span><strong>Dual surge-protected 5A sockets</strong> per desk + Inverter backup.</span>
-              </div>
-            </div>
-
-            {/* Row 4 */}
-            <div className="grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 gap-3 items-center bg-slate-50/50 hover:bg-slate-50 transition-colors">
-              <div className="md:col-span-4 font-bold text-slate-900">
-                Operating Schedule
-              </div>
-              <div className="md:col-span-4 text-slate-500 text-sm flex items-start gap-2">
-                <span className="text-rose-500 font-bold shrink-0">✕</span>
-                Rigid 10–12 hr shifts; locked outside standard hours.
-              </div>
-              <div className="md:col-span-4 font-semibold text-slate-900 flex items-start gap-2">
-                <span className="text-emerald-600 font-bold shrink-0">✓</span>
-                <span><strong>24x7 Round-the-Clock Biometric Access</strong> (Study anytime).</span>
-              </div>
-            </div>
-
-            {/* Row 5 */}
-            <div className="grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 gap-3 items-center hover:bg-slate-50/80 transition-colors">
-              <div className="md:col-span-4 font-bold text-slate-900">
-                Safety & Surveillance
-              </div>
-              <div className="md:col-span-4 text-slate-500 text-sm flex items-start gap-2">
-                <span className="text-rose-500 font-bold shrink-0">✕</span>
-                Unattended entrance, blind spots, unsafe late-night storage.
-              </div>
-              <div className="md:col-span-4 font-semibold text-slate-900 flex items-start gap-2">
-                <span className="text-emerald-600 font-bold shrink-0">✓</span>
-                <span><strong>9 HD CCTV cameras</strong> + Keyless biometric security (Women-safe).</span>
-              </div>
-            </div>
-
-            {/* Row 6 */}
-            <div className="grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 gap-3 items-center bg-slate-50/50 hover:bg-slate-50 transition-colors">
-              <div className="md:col-span-4 font-bold text-slate-900">
-                Acoustic Discipline
-              </div>
-              <div className="md:col-span-4 text-slate-500 text-sm flex items-start gap-2">
-                <span className="text-rose-500 font-bold shrink-0">✕</span>
-                Frequent phone calls, hallway chatter, loud disturbances.
-              </div>
-              <div className="md:col-span-4 font-semibold text-slate-900 flex items-start gap-2">
-                <span className="text-emerald-600 font-bold shrink-0">✓</span>
-                <span><strong>Strict &lt; 35 dB silent zone protocol</strong>; zero in-hall calls.</span>
-              </div>
-            </div>
-
-            {/* Row 7 */}
-            <div className="grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 gap-3 items-center hover:bg-slate-50/80 transition-colors">
-              <div className="md:col-span-4 font-bold text-slate-900">
-                Amenities & Hygiene
-              </div>
-              <div className="md:col-span-4 text-slate-500 text-sm flex items-start gap-2">
-                <span className="text-rose-500 font-bold shrink-0">✕</span>
-                Unfiltered tap water, poorly maintained washrooms.
-              </div>
-              <div className="md:col-span-4 font-semibold text-slate-900 flex items-start gap-2">
-                <span className="text-emerald-600 font-bold shrink-0">✓</span>
-                <span><strong>Multi-stage RO purified water</strong> + Daily sanitized washrooms.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* What a seat includes */}
+      <ServicesGrid />
 
       {/* Real Facility Photo Gallery */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full border-t border-slate-200">

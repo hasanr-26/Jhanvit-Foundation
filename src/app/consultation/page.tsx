@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import Testimonials from '@/components/Testimonials';
 import {
   BookmarkCheck,
   Calendar,
@@ -276,6 +277,8 @@ export default function ConsultationPage() {
           </div>
         </div>
       </section>
+
+      <Testimonials />
 
       <Footer />
       <WhatsAppButton />
