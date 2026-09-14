@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  getBlogPosts,
+  useBlogPosts,
   saveBlogPost,
   deleteBlogPost,
   resetBlogPostsToDefault,
@@ -13,8 +13,6 @@ import {
   importBlogPosts,
   isPostPubliclyVisible,
   BlogPost,
-  BlogFAQ,
-  BlogStatus,
 } from '@/lib/blogData';
 import {
   Plus,
@@ -23,17 +21,13 @@ import {
   Eye,
   Search,
   Upload,
-  Image as ImageIcon,
   Save,
   X,
   CheckCircle2,
   AlertCircle,
   HelpCircle,
-  Sparkles,
   Calendar,
   Clock,
-  User,
-  Tag,
   ArrowUpRight,
   RefreshCw,
   FileText,
@@ -138,7 +132,7 @@ const parseScheduledDateTime = (isoString?: string) => {
       return { date: datePart || new Date().toISOString().split('T')[0], hour: '10', minute: '00', period: 'AM' };
     }
     const [hStr, mStr] = timePart.split(':');
-    let hNum = parseInt(hStr, 10) || 0;
+    const hNum = parseInt(hStr, 10) || 0;
     const period = hNum >= 12 ? 'PM' : 'AM';
     let h12 = hNum % 12;
     if (h12 === 0) h12 = 12;
@@ -168,7 +162,8 @@ const formatScheduledDateTime = (date: string, hour12: string, minute: string, p
 };
 
 export default function BlogEditor() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+  // Live list from the shared store — every save/delete below refreshes it.
+  const posts = useBlogPosts();
   const [searchQuery, setSearchQuery] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
@@ -179,14 +174,6 @@ export default function BlogEditor() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const backupImportInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    loadPosts();
-  }, []);
-
-  const loadPosts = () => {
-    setPosts(getBlogPosts());
-  };
 
   const showNotification = (msg: string) => {
     setNotification(msg);
@@ -226,7 +213,6 @@ export default function BlogEditor() {
   const handleDelete = (id: string, title: string) => {
     if (confirm(`Are you sure you want to delete "${title}"?`)) {
       deleteBlogPost(id);
-      loadPosts();
       showNotification('Blog post deleted successfully.');
     }
   };
@@ -267,7 +253,6 @@ export default function BlogEditor() {
     };
 
     saveBlogPost(postToSave);
-    loadPosts();
     setIsEditing(false);
     setEditingPost(null);
 
@@ -334,7 +319,6 @@ export default function BlogEditor() {
   // Safe merge default sample posts without deleting custom articles
   const handleSafeRestoreSamples = () => {
     restoreDefaultSamplePostsPreservingCustom();
-    loadPosts();
     setShowResetModal(false);
     showNotification('Default sample posts restored. All custom articles were preserved!');
   };
@@ -346,7 +330,6 @@ export default function BlogEditor() {
       return;
     }
     resetBlogPostsToDefault();
-    loadPosts();
     setShowResetModal(false);
     setResetConfirmInput('');
     showNotification('All articles reset to starter defaults.');
@@ -362,12 +345,11 @@ export default function BlogEditor() {
         const parsed = JSON.parse(event.target?.result as string);
         const result = importBlogPosts(parsed, 'merge');
         if (result.success) {
-          loadPosts();
           showNotification(`Successfully imported and merged ${result.count} articles!`);
         } else {
           alert('Invalid backup file format.');
         }
-      } catch (err) {
+      } catch {
         alert('Failed to parse backup JSON file.');
       }
     };
@@ -484,7 +466,6 @@ export default function BlogEditor() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredPosts.map((post) => {
               const isScheduledFuture = post.status === 'scheduled' && !isPostPubliclyVisible(post);
-              const isLive = isPostPubliclyVisible(post);
 
               return (
                 <div
