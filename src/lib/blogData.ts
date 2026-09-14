@@ -1,5 +1,8 @@
 // blogData.ts — Data model, starter blog articles, and persistence helpers for Jhanvit Foundation Blog
 
+import { useMemo } from 'react';
+import { createClientStore } from './clientStore';
+
 export interface BlogFAQ {
   question: string;
   answer: string;
@@ -215,6 +218,33 @@ export function getBlogPosts(): BlogPost[] {
 }
 
 /**
+ * Same read as getBlogPosts but without the side effect of seeding storage.
+ * The external store calls this during render, so it must stay pure.
+ */
+function readBlogPosts(): BlogPost[] {
+  if (typeof window === 'undefined') return INITIAL_BLOG_POSTS;
+  try {
+    const stored = localStorage.getItem(BLOG_STORAGE_KEY);
+    if (!stored) return INITIAL_BLOG_POSTS;
+    const posts: BlogPost[] = JSON.parse(stored);
+    return Array.isArray(posts) && posts.length > 0 ? posts : INITIAL_BLOG_POSTS;
+  } catch {
+    return INITIAL_BLOG_POSTS;
+  }
+}
+
+const blogStore = createClientStore(BLOG_STORAGE_KEY, readBlogPosts, INITIAL_BLOG_POSTS);
+
+/** Live list of every post, admin view included. */
+export const useBlogPosts = blogStore.useValue;
+
+/** Live list of posts a visitor should see. */
+export function usePublicBlogPosts(): BlogPost[] {
+  const posts = useBlogPosts();
+  return useMemo(() => posts.filter(isPostPubliclyVisible), [posts]);
+}
+
+/**
  * Check if a post is publicly visible (published or scheduled date has passed)
  */
 export function isPostPubliclyVisible(post: BlogPost): boolean {
@@ -262,6 +292,7 @@ export function saveBlogPost(post: BlogPost): void {
       updated = [post, ...posts];
     }
     localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(updated));
+    blogStore.notify();
   } catch (err) {
     console.error('Error saving blog post:', err);
   }
@@ -276,6 +307,7 @@ export function deleteBlogPost(id: string): void {
     const posts = getBlogPosts();
     const updated = posts.filter((p) => p.id !== id);
     localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(updated));
+    blogStore.notify();
   } catch (err) {
     console.error('Error deleting blog post:', err);
   }
@@ -287,6 +319,7 @@ export function deleteBlogPost(id: string): void {
 export function resetBlogPostsToDefault(): void {
   if (typeof window === 'undefined') return;
   localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(INITIAL_BLOG_POSTS));
+  blogStore.notify();
 }
 
 /**
@@ -303,6 +336,7 @@ export function restoreDefaultSamplePostsPreservingCustom(): void {
     );
     const merged = [...current, ...missingDefaults];
     localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(merged));
+    blogStore.notify();
   } catch (err) {
     console.error('Error restoring default sample posts:', err);
   }
@@ -340,6 +374,7 @@ export function importBlogPosts(importedPosts: BlogPost[], mode: 'merge' | 'repl
 
     if (mode === 'replace') {
       localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(importedPosts));
+      blogStore.notify();
       return { success: true, count: importedPosts.length };
     }
 
@@ -350,6 +385,7 @@ export function importBlogPosts(importedPosts: BlogPost[], mode: 'merge' | 'repl
     importedPosts.forEach((p) => map.set(p.id, p));
     const merged = Array.from(map.values());
     localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(merged));
+    blogStore.notify();
     return { success: true, count: importedPosts.length };
   } catch (err) {
     console.error('Error importing blog posts:', err);

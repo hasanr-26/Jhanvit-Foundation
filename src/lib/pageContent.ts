@@ -36,6 +36,21 @@ export interface Pillar {
   points: string[];
 }
 
+/** One card in the "what we do" grid on the homepage. */
+export interface Initiative {
+  id: string;
+  badge: string;
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+  ctaText: string;
+  meta: string;
+  location?: string;
+  featured: boolean;
+  highlights: { value: string; label: string }[];
+}
+
 export interface ServiceItem {
   id: string;
   icon: IconKey;
@@ -104,6 +119,7 @@ export interface PageContent {
     pillars: Pillar[];
     initiativesHeading: string;
     initiativesIntro: string;
+    initiatives: Initiative[];
     newsHeading: string;
     newsIntro: string;
   };
@@ -200,6 +216,53 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
     initiativesHeading: 'How Jhanvit Foundation Supports Aspirants',
     initiativesIntro:
       'Three things we do, and the specific problem each one solves for a student preparing full time.',
+    initiatives: [
+      {
+        id: 'init-hall',
+        badge: 'Physical Facility • 24x7',
+        title: 'ANUBHAVV Abhyasika & Study Space',
+        description:
+          'A distraction-free study environment built for aspirants putting in 10 to 14 hours a day for UPSC, MPSC and state examinations.',
+        image: '/images/facility/facility_cubicles.jpg',
+        href: '/anubhavv',
+        ctaText: 'Explore Hall & Seats',
+        meta: 'Sadashiv Peth Facility',
+        location: 'Sadashiv Peth, Pune',
+        featured: true,
+        highlights: [
+          { value: '125', label: 'Dedicated Desks' },
+          { value: 'Dual ISP', label: 'Failover WiFi' },
+          { value: '9 HD', label: 'CCTV Cameras' },
+          { value: '24x7', label: 'Biometric Access' },
+        ],
+      },
+      {
+        id: 'init-consult',
+        badge: 'Mentorship',
+        title: '1-on-1 Diagnostic Consultation',
+        description:
+          'Exam-specific strategy, a syllabus audit, booklist corrections and a timetable built around the hours you actually have.',
+        image: '/images/slide2.jpg',
+        href: '/consultation',
+        ctaText: 'Book Consultation',
+        meta: 'UPSC / MPSC',
+        featured: false,
+        highlights: [],
+      },
+      {
+        id: 'init-sponsor',
+        badge: 'Financial Aid',
+        title: 'Student Seat Sponsorship',
+        description:
+          'Donor money pays the study hall fee directly for aspirants from low-income families. Nothing is deducted along the way.',
+        image: '/images/slide4.jpg',
+        href: '/sponsorship',
+        ctaText: 'Apply or Sponsor',
+        meta: '100% Direct Aid',
+        featured: false,
+        highlights: [],
+      },
+    ],
     newsHeading: 'News & Updates',
     newsIntro:
       'Notes on exam strategy, what is happening at the study hall, and stories from students we work with.',
