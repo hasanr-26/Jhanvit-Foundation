@@ -24,15 +24,27 @@ This document outlines the roadmap and technical specifications for transitionin
 ## 2. 🗄️ Database & Content Migration
 
 ### Current State:
-- Content (Blog posts, site configurations, donation presets) is managed via `src/lib/blogData.ts` and `src/lib/siteConfig.ts` with browser `localStorage` fallback and JSON export/import backup tools.
+Four `localStorage`-backed stores, each exposed through `src/lib/clientStore.ts` so every
+mounted component re-renders the moment the admin saves (including other open tabs):
+
+| Store | Module | Storage key | Holds |
+| --- | --- | --- | --- |
+| Site config | `src/lib/siteConfig.ts` | `jhanvit_site_config` | Impact stats, contact details, legal/registration fields, donation presets, bank details |
+| Page content | `src/lib/pageContent.ts` | `jhanvit_page_content` | Problem/solution/vision/mission tabs, initiatives, About prose, principles, partner logos, ANUBHAVV services, testimonials, workshops, fellowship, career openings, social handles |
+| Blog posts | `src/lib/blogData.ts` | `jhanvit_blog_posts` | Articles, FAQs, scheduling |
+| Submissions | `src/lib/submissions.ts` | `jhanvit_submissions` | Consultations, seat bookings, sponsorships, workshop and fellowship applications, contact messages |
+
+Every public form writes through `addSubmission()`; `/admin` reads the same rows and can
+change status, add internal notes, delete, and export CSV.
 
 ### Future Implementation:
 - **Recommended Stack**: PostgreSQL with **Prisma ORM** / **Drizzle ORM** (hosted on Supabase, Neon, or Railway).
 - **Schema Overview**:
   - `posts` table: `id`, `slug`, `title`, `excerpt`, `content`, `category`, `tags[]`, `author_name`, `author_role`, `author_avatar`, `banner_url`, `status` (`'draft' | 'published' | 'scheduled'`), `scheduled_at`, `read_time`, `featured`, `created_at`, `updated_at`.
   - `post_faqs` table: `id`, `post_id`, `question`, `answer`, `order`.
-  - `registrations` table: consultation bookings, sponsorship seat applications, and donor records.
+  - `submissions` table: `id`, `kind` (`'consultation' | 'seat' | 'sponsorship' | 'workshop' | 'fellowship' | 'contact'`), `status`, `name`, `phone`, `email`, `details` (JSONB), `notes`, `created_at`. Mirrors `Submission` in `src/lib/submissions.ts` one-for-one.
   - `site_config` table: key-value or JSON config for contact info, NGO credentials, and donation presets.
+  - `page_content` table: one JSON document mirroring `PageContent`, or normalised tables per list (`pillars`, `initiatives`, `services`, `testimonials`, `partners`, `workshops`, `career_openings`, `social_links`) if the content team wants row-level history.
 - **Data Migration**:
   - Use the built-in **"Export Backup (JSON)"** feature in the Blog Editor to generate `jhanvit-blog-backup.json`, and run a seed script (`prisma/seed.ts`) to populate the production database without data loss.
 
@@ -58,7 +70,12 @@ This document outlines the roadmap and technical specifications for transitionin
 ## 4. 🔐 Authentication & Multi-Admin Access
 
 ### Current State:
-- Admin password verification against local configuration (`adminpass.txt`).
+- A password list in `src/app/admin/page.tsx`, checked in the browser. The session is held in
+  `sessionStorage` under `jhanvit_admin_session`, so a refresh keeps you signed in and closing
+  the tab signs you out.
+- **This is a prototype gate, not security.** The passwords ship in the client bundle and the
+  data lives in the visitor's own browser. Replace this before the site handles real applicant
+  data.
 
 ### Future Implementation:
 - Implement **NextAuth.js (Auth.js)** or **Clerk** / **Supabase Auth**.
