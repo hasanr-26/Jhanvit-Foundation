@@ -39,6 +39,7 @@ export interface Pillar {
 /** One card in the "what we do" grid on the homepage. */
 export interface Initiative {
   id: string;
+  icon: IconKey;
   badge: string;
   title: string;
   description: string;
@@ -219,6 +220,7 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
     initiatives: [
       {
         id: 'init-hall',
+        icon: 'building',
         badge: 'Physical Facility • 24x7',
         title: 'ANUBHAVV Abhyasika & Study Space',
         description:
@@ -238,6 +240,7 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       },
       {
         id: 'init-consult',
+        icon: 'book',
         badge: 'Mentorship',
         title: '1-on-1 Diagnostic Consultation',
         description:
@@ -251,6 +254,7 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       },
       {
         id: 'init-sponsor',
+        icon: 'heart',
         badge: 'Financial Aid',
         title: 'Student Seat Sponsorship',
         description:
