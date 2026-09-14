@@ -448,9 +448,51 @@ export default function PageContentEditor() {
         savedSection={savedSection}
       >
         <h4 className="text-xs font-extrabold text-slate-500 uppercase tracking-wide">
+          Page banner
+        </h4>
+        <div className="space-y-3">
+          <div>
+            <FieldLabel label="Banner heading" />
+            <TextInput
+              value={content.about.heroHeading}
+              onChange={(heroHeading) => setAbout({ heroHeading })}
+            />
+          </div>
+          <div>
+            <FieldLabel label="Banner text" />
+            <TextAreaInput
+              value={content.about.heroIntro}
+              onChange={(heroIntro) => setAbout({ heroIntro })}
+              rows={2}
+            />
+          </div>
+        </div>
+
+        <h4 className="text-xs font-extrabold text-slate-500 uppercase tracking-wide pt-4 border-t border-white/5">
           Ground reality &amp; purpose
         </h4>
         <ProseEditor block={content.about.intro} onChange={(intro) => setAbout({ intro })} />
+
+        <div className="pt-4 border-t border-white/5 space-y-3">
+          <h4 className="text-xs font-extrabold text-slate-500 uppercase tracking-wide">
+            Highlighted box
+          </h4>
+          <div>
+            <FieldLabel label="Box title" />
+            <TextInput
+              value={content.about.dualApproachTitle}
+              onChange={(dualApproachTitle) => setAbout({ dualApproachTitle })}
+            />
+          </div>
+          <div>
+            <FieldLabel label="Box text" />
+            <TextAreaInput
+              value={content.about.dualApproachBody}
+              onChange={(dualApproachBody) => setAbout({ dualApproachBody })}
+              rows={3}
+            />
+          </div>
+        </div>
 
         <div className="pt-4 border-t border-white/5 space-y-3">
           <h4 className="text-xs font-extrabold text-slate-500 uppercase tracking-wide">

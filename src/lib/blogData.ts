@@ -156,9 +156,9 @@ Long study hours without lumbar support lead to neck strain, lower back fatigue,
     slug: 'bridging-the-opportunity-gap-community-sponsorship',
     title: 'Bridging the Opportunity Gap: How Seat Sponsorship Transforms Deserving Aspirants’ Lives',
     excerpt:
-      'Behind every Section 8 non-profit initiative is a human story. Discover how donor-backed seat sponsorships empower brilliant students from underprivileged backgrounds.',
+      'Behind every sponsored seat is a human story. How donor-backed sponsorships change what is possible for students from underprivileged backgrounds.',
     category: 'Social Impact',
-    tags: ['Sponsorship', 'Non-Profit', 'Education Equality', 'Section 8', 'Jhanvit Foundation'],
+    tags: ['Sponsorship', 'Non-Profit', 'Education Equality', 'Jhanvit Foundation'],
     author: {
       name: 'Ganesh Zanjad',
       role: 'Founder & Director, Jhanvit Foundation',

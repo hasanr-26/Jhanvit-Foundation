@@ -24,12 +24,10 @@ export default function AboutPage() {
       <section className="bg-[#007085] text-white pt-28 sm:pt-36 pb-16 sm:pb-20 px-4 sm:px-6 border-b-4 border-[#005e70]">
         <div className="max-w-7xl mx-auto text-center space-y-4">
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
-            Built by an Aspirant, for Aspirants
+            {about.heroHeading}
           </h1>
           <p className="max-w-3xl mx-auto text-cyan-50 text-base sm:text-lg leading-relaxed">
-            Jhanvit Foundation exists to ensure that lack of a quiet study space, strategic
-            guidance, or financial means never stops a hardworking student from clearing competitive
-            exams.
+            {about.heroIntro}
           </p>
         </div>
       </section>
@@ -55,13 +53,10 @@ export default function AboutPage() {
 
             <div className="p-5 rounded-2xl bg-cyan-50/80 border border-cyan-200/80 space-y-2">
               <div className="font-bold text-[#007085] text-base sm:text-lg">
-                Jhanvit Foundation&apos;s Dual Approach:
+                {about.dualApproachTitle}
               </div>
               <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-                We combine physical study hall infrastructure (<strong>ANUBHAVV Abhyasika</strong> in
-                Sadashiv Peth) with <strong>1-on-1 exam mentorship</strong> and{' '}
-                <strong>verified student seat sponsorships</strong> for candidates from lower-income
-                backgrounds.
+                {about.dualApproachBody}
               </p>
             </div>
           </div>

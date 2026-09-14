@@ -125,6 +125,10 @@ export interface PageContent {
     newsIntro: string;
   };
   about: {
+    heroHeading: string;
+    heroIntro: string;
+    dualApproachTitle: string;
+    dualApproachBody: string;
     intro: ProseBlock;
     founder: ProseBlock;
     principles: Principle[];
@@ -272,6 +276,12 @@ export const DEFAULT_PAGE_CONTENT: PageContent = {
       'Notes on exam strategy, what is happening at the study hall, and stories from students we work with.',
   },
   about: {
+    heroHeading: 'Built by an Aspirant, for Aspirants',
+    heroIntro:
+      'Jhanvit Foundation exists to ensure that lack of a quiet study space, strategic guidance, or financial means never stops a hardworking student from clearing competitive exams.',
+    dualApproachTitle: "Jhanvit Foundation's Dual Approach",
+    dualApproachBody:
+      'We combine physical study hall infrastructure (ANUBHAVV Abhyasika in Sadashiv Peth) with 1-on-1 exam mentorship and verified student seat sponsorships for candidates from lower-income backgrounds.',
     intro: {
       eyebrow: 'Our Ground Reality & Purpose',
       heading: 'What Actually Stops Aspirants in Sadashiv Peth',
