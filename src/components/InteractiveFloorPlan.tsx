@@ -14,10 +14,8 @@ import {
   Coffee,
   Briefcase,
   Bath,
-  Sparkles,
   AlertCircle,
   Calendar,
-  Phone,
   Mail,
   User,
   BookOpen,
@@ -472,7 +470,6 @@ export default function InteractiveFloorPlan() {
             onClick={() => selectRandomSeat('green')}
             className="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold py-3.5 rounded-xl text-center text-sm transition shadow-sm flex items-center justify-center gap-2"
           >
-            <Sparkles className="w-4 h-4" />
             <span>Select Green Seat</span>
           </button>
         </div>
@@ -502,7 +499,6 @@ export default function InteractiveFloorPlan() {
             onClick={() => selectRandomSeat('yellow')}
             className="w-full bg-amber-500 hover:bg-amber-600 active:scale-[0.99] text-white font-bold py-3.5 rounded-xl text-center text-sm transition shadow-sm flex items-center justify-center gap-2"
           >
-            <Sparkles className="w-4 h-4" />
             <span>Select Yellow Seat</span>
           </button>
         </div>
@@ -532,7 +528,6 @@ export default function InteractiveFloorPlan() {
             onClick={() => selectRandomSeat('pink')}
             className="w-full bg-purple-600 hover:bg-purple-700 active:scale-[0.99] text-white font-bold py-3.5 rounded-xl text-center text-sm transition shadow-sm flex items-center justify-center gap-2"
           >
-            <Sparkles className="w-4 h-4" />
             <span>Select Pink Seat</span>
           </button>
         </div>
@@ -1034,7 +1029,7 @@ export default function InteractiveFloorPlan() {
               <div className="space-y-5">
                 {/* Modal Header */}
                 <div className="border-b border-slate-100 pb-4 pr-8">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-50 text-[#007085] text-xs font-extrabold border border-cyan-200 mb-2">
+                  <div className="inline-flex items-center gap-1.5 text-[#007085] text-xs font-bold mb-2">
                     RESERVE STUDY SEAT
                   </div>
                   <h3 className="text-2xl font-black text-slate-900">

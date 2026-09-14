@@ -7,18 +7,11 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import Testimonials from '@/components/Testimonials';
 import { addSubmission } from '@/lib/submissions';
 import {
-  BookmarkCheck,
-  Calendar,
-  Clock,
-  User,
-  Phone,
-  Mail,
   CheckCircle,
   ShieldCheck,
   FileText,
-  Sparkles,
+  Target,
   CreditCard,
-  MessageSquare,
 } from 'lucide-react';
 
 export default function ConsultationPage() {
@@ -95,7 +88,7 @@ export default function ConsultationPage() {
 
               <div className="flex gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
                 <div className="w-10 h-10 rounded-xl bg-[#e6f7fa] text-[#0090b0] flex items-center justify-center flex-shrink-0">
-                  <Sparkles className="w-5 h-5" />
+                  <Target className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900 text-sm">Stage-Specific Strategy</h4>

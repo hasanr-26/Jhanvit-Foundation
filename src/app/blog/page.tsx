@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
@@ -10,25 +10,15 @@ import {
   Search,
   Calendar,
   Clock,
-  User,
   ArrowRight,
-  Sparkles,
   BookOpen,
-  Tag,
-  Share2,
-  CheckCircle2,
-  TrendingUp,
 } from 'lucide-react';
-import { getPublicBlogPosts, BlogPost } from '@/lib/blogData';
+import { usePublicBlogPosts } from '@/lib/blogData';
 
 export default function BlogPage() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const posts = usePublicBlogPosts();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-
-  useEffect(() => {
-    setPosts(getPublicBlogPosts());
-  }, []);
 
   const categories = useMemo(() => {
     const cats = ['All'];
@@ -73,29 +63,14 @@ export default function BlogPage() {
       <Navbar />
 
       {/* Hero Header */}
-      <section className="bg-gradient-to-b from-[#006578] via-[#007085] to-[#005261] text-white pt-28 sm:pt-36 pb-16 sm:pb-20 px-4 sm:px-6 relative overflow-hidden border-b-4 border-[#004754]">
-        {/* Subtle grid pattern */}
-        <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0)',
-            backgroundSize: '24px 24px',
-          }}
-        />
-
-        <div className="max-w-5xl mx-auto text-center space-y-5 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-cyan-200 text-xs sm:text-sm font-bold border border-white/20 shadow-sm backdrop-blur-sm">
-            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-            <span>KNOWLEDGE HUB & ASPIRANT INSIGHTS</span>
-          </div>
-
+      <section className="bg-[#007085] text-white pt-28 sm:pt-36 pb-16 sm:pb-20 px-4 sm:px-6 border-b-4 border-[#005e70]">
+        <div className="max-w-5xl mx-auto text-center space-y-5">
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-sm">
-            Jhanvit Foundation <span className="text-cyan-200">Blog</span>
+News &amp; Updates
           </h1>
 
           <p className="max-w-2xl mx-auto text-cyan-100 text-sm sm:text-base md:text-lg leading-relaxed">
-            In-depth guides, exam strategies, study psychology, modern engineering insights, and stories of transformation from Pune&apos;s leading educational non-profit.
+Exam strategy, study habits, what is happening at the study hall, and stories from the students we work with.
           </p>
 
           {/* Search Bar */}
@@ -165,8 +140,8 @@ export default function BlogPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent lg:hidden" />
                 <div className="absolute top-4 left-4 flex gap-2">
-                  <span className="bg-[#f5b82e] text-slate-950 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
-                    ★ Featured Story
+                  <span className="bg-[#f5b82e] text-slate-950 text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                    Featured
                   </span>
                   <span className="bg-[#007085] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
                     {featuredPost.category}

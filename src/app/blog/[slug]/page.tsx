@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useState, useMemo } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import React, { useState, useMemo } from 'react';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
@@ -10,43 +10,29 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import {
   Calendar,
   Clock,
-  User,
   ChevronRight,
-  Share2,
-  Bookmark,
-  Heart,
-  ArrowLeft,
   ArrowRight,
   HelpCircle,
   ChevronDown,
-  CheckCircle2,
-  Sparkles,
   BookOpen,
   Send,
   Copy,
   Check,
 } from 'lucide-react';
-import { getBlogPosts, getBlogPostBySlug, getPublicBlogPosts, isPostPubliclyVisible, BlogPost } from '@/lib/blogData';
+import { useBlogPosts, isPostPubliclyVisible } from '@/lib/blogData';
 
 export default function BlogPostDetailPage() {
   const params = useParams();
-  const router = useRouter();
   const slug = params?.slug as string;
 
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
+  const allPosts = useBlogPosts();
   const [copied, setCopied] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
-  useEffect(() => {
-    if (!slug) return;
-    const posts = getBlogPosts();
-    setAllPosts(posts);
-    const found = getBlogPostBySlug(slug);
-    if (found) {
-      setPost(found);
-    }
-  }, [slug]);
+  const post = useMemo(
+    () => allPosts.find((p) => p.slug === slug || p.id === slug) ?? null,
+    [allPosts, slug]
+  );
 
   const relatedPosts = useMemo(() => {
     if (!post) return [];

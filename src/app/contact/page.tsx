@@ -9,11 +9,9 @@ import {
   MapPin,
   Phone,
   Mail,
-  Share2,
   Clock,
   Send,
   CheckCircle,
-  MessageSquare,
 } from 'lucide-react';
 import { useSiteConfig } from '@/lib/siteConfig';
 import { addSubmission } from '@/lib/submissions';

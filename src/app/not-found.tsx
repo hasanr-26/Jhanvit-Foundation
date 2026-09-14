@@ -51,18 +51,15 @@ export default function NotFound() {
 
       <main className="flex-1 flex items-center justify-center pt-32 sm:pt-40 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl w-full text-center space-y-8">
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 text-[#007085] text-xs sm:text-sm font-extrabold border border-cyan-200">
-            ERROR 404 • PAGE NOT FOUND
-          </div>
+          <p className="text-sm font-bold text-[#007085] tracking-wide">404 — Page not found</p>
 
           {/* Large Editorial Headline */}
           <div className="space-y-3">
             <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight">
-              Looks Like You Wandered Off the Study Track
+This Page Does Not Exist
             </h1>
             <p className="text-slate-600 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-              The page you are looking for does not exist, has moved, or the link may be broken. Let&apos;s get you back to where you need to be.
+The page may have moved, or the link you followed may be out of date.
             </p>
           </div>
 
@@ -80,7 +77,7 @@ export default function NotFound() {
           {/* Quick Help Navigation Links */}
           <div className="pt-8 border-t border-slate-200 space-y-4">
             <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-500">
-              Popular Pages You Might Be Looking For
+Try one of these instead
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
               {quickLinks.map((item) => {

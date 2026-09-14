@@ -1,25 +1,27 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import {
-  HeartHandshake,
   CheckCircle,
   ShieldCheck,
   QrCode,
   Building,
   CreditCard,
-  Sparkles,
-  AlertTriangle,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { getSiteConfig, SiteConfig, DEFAULT_SITE_CONFIG } from '@/lib/siteConfig';
+import { useSiteConfig } from '@/lib/siteConfig';
 
 export default function DonatePage() {
-  const [siteConfig, setSiteConfig] = useState<SiteConfig>(DEFAULT_SITE_CONFIG);
-  const [selectedTier, setSelectedTier] = useState<number | 'custom'>(2000);
+  const siteConfig = useSiteConfig();
+  // null until the visitor picks one, so the "popular" preset stays the default
+  // even after the admin edits the tiers.
+  const [pickedTier, setPickedTier] = useState<number | 'custom' | null>(null);
+  const selectedTier =
+    pickedTier ?? siteConfig.donationPresets.find((p) => p.popular)?.amount ?? 2000;
+  const setSelectedTier = setPickedTier;
   const [customAmount, setCustomAmount] = useState<string>('');
   const [donorInfo, setDonorInfo] = useState({
     name: '',
@@ -29,14 +31,6 @@ export default function DonatePage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [donated, setDonated] = useState(false);
-
-  useEffect(() => {
-    const config = getSiteConfig();
-    setSiteConfig(config);
-    // Set default selected tier to the "popular" preset amount
-    const popular = config.donationPresets.find((p) => p.popular);
-    if (popular) setSelectedTier(popular.amount);
-  }, []);
 
   const getFinalAmount = () => {
     if (selectedTier === 'custom') {
