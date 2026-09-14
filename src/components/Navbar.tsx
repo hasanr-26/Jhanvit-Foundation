@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, Mail, MapPin, HeartHandshake, BookOpen } from 'lucide-react';
+import SocialLinks from './SocialLinks';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,7 @@ export default function Navbar() {
     { name: 'About Us', href: '/about' },
     { name: 'ANUBHAVV Study Hall', href: '/anubhavv' },
     { name: 'Consultation', href: '/consultation' },
-    { name: 'Sponsorship', href: '/sponsorship' },
+    { name: 'Student Section', href: '/sponsorship' },
     { name: 'Donate', href: '/donate' },
     { name: 'Contact', href: '/contact' },
   ];
@@ -39,25 +40,18 @@ export default function Navbar() {
       <div className="bg-[#007085] text-white text-xs py-1 px-4 hidden md:block border-b border-white/10">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-5">
-            <span className="flex items-center gap-1.5 font-semibold text-xs">
-              <span className="bg-white/20 text-white text-xs font-bold px-2 py-0.5 rounded border border-white/20">
-                SECTION 8 NON-PROFIT
-              </span>
-              CIN: U85499PN2026NPL255094
-            </span>
             <span className="flex items-center gap-1.5 opacity-95 text-cyan-50 text-xs font-medium">
               <MapPin className="w-3.5 h-3.5 text-cyan-200" />
               Sadashiv Peth, Pune – 411030
             </span>
-          </div>
-          <div className="flex items-center space-x-5 text-cyan-50 text-xs font-medium">
-            <a href="tel:7066422555" className="hover:text-cyan-200 transition flex items-center gap-1.5">
+            <a href="tel:7066422555" className="hover:text-cyan-200 transition flex items-center gap-1.5 text-cyan-50 text-xs font-medium">
               <Phone className="w-3.5 h-3.5 text-cyan-200" /> 7066422555
             </a>
-            <a href="mailto:anubhavveducation@gmail.com" className="hover:text-cyan-200 transition flex items-center gap-1.5">
+            <a href="mailto:anubhavveducation@gmail.com" className="hover:text-cyan-200 transition flex items-center gap-1.5 text-cyan-50 text-xs font-medium">
               <Mail className="w-3.5 h-3.5 text-cyan-200" /> anubhavveducation@gmail.com
             </a>
           </div>
+          <SocialLinks className="py-0.5" />
         </div>
       </div>
 
@@ -188,6 +182,9 @@ export default function Navbar() {
               >
                 <HeartHandshake className="w-5 h-5" /> Support an Aspirant (Donate)
               </Link>
+              <div className="pt-2 flex justify-center">
+                <SocialLinks size="md" />
+              </div>
             </div>
           </div>
         )}

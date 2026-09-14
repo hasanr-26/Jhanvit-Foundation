@@ -5,9 +5,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, HeartHandshake, ArrowUpRight } from 'lucide-react';
 import { useSiteConfig } from '@/lib/siteConfig';
+import { usePublicBlogPosts } from '@/lib/blogData';
+import SocialLinks from './SocialLinks';
 
 export default function Footer() {
   const config = useSiteConfig();
+  // Latest four published articles, so these links never go stale.
+  const recentPosts = [...usePublicBlogPosts()]
+    .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
+    .slice(0, 4);
 
   return (
     <footer className="bg-[#0f172a] text-slate-300 pt-16 pb-12 border-t-4 border-[#0090b0] relative overflow-hidden">
@@ -23,7 +29,7 @@ export default function Footer() {
                 height={90}
                 className="object-contain h-20 md:h-24 w-auto"
               />
-              <p className="text-xs text-cyan-300 font-bold">Section 8 Non-Profit Organisation</p>
+              <p className="text-xs text-cyan-300 font-bold">Registered under MCA, Govt. of India</p>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
               Empowering competitive exam aspirants in Pune through structured study spaces, expert guidance, and financial sponsorship.
@@ -69,7 +75,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href="/sponsorship" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
-                    <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> Sponsored Seats
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> Student Section
                   </Link>
                 </li>
                 <li>
@@ -79,7 +85,12 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href="/contact" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
-                    <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> Contact & Directions
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> Contact &amp; Directions
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact#careers" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> Careers at Jhanvit
                   </Link>
                 </li>
               </ul>
@@ -88,34 +99,25 @@ export default function Footer() {
             {/* Knowledge Hub & Blog */}
             <div className="space-y-3.5">
               <h4 className="text-sm font-bold text-white uppercase tracking-wider border-l-2 border-[#0090b0] pl-2.5">
-                Knowledge Hub & Blog
+                News &amp; Updates
               </h4>
               <ul className="space-y-2.5 text-xs">
                 <li>
-                  <Link href="/blog" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5 font-semibold text-cyan-300">
-                    <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> All Articles & Insights →
+                  <Link href="/blog" className="hover:text-[#0090b0] transition flex items-center gap-1.5 font-semibold text-cyan-300">
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> All articles
                   </Link>
                 </li>
-                <li>
-                  <Link href="/blog/digital-twin-technology-the-future-of-engineering" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
-                    <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> Digital Twin Tech in Infrastructure
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog/complete-guide-upsc-mpsc-preparation-pune" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
-                    <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> UPSC & MPSC Strategy Guide
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog/science-of-deep-work-competitive-exams" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
-                    <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> Deep Work Study Techniques
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog/empowering-aspirants-educational-sponsorship-pune" className="hover:text-[#0090b0] text-slate-300 transition flex items-center gap-1.5">
-                    <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0]" /> Student Sponsorship & Grants
-                  </Link>
-                </li>
+                {recentPosts.map((post) => (
+                  <li key={post.id}>
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="hover:text-[#0090b0] text-slate-300 transition flex items-start gap-1.5"
+                    >
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#0090b0] shrink-0 mt-0.5" />
+                      <span className="line-clamp-2">{post.title}</span>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -164,12 +166,20 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Follow us */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-8">
+          <span className="text-xs font-bold text-white uppercase tracking-wider">
+            Follow Jhanvit Foundation
+          </span>
+          <SocialLinks size="md" tone="dark" />
+        </div>
+
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 gap-4">
           <p>© 2026 {config.orgName}. All rights reserved. Registered under MCA, Govt of India.</p>
           <div className="flex items-center gap-4 text-xs text-slate-400">
             <Link href="/blog" className="hover:text-cyan-300 transition">
-              Knowledge Hub & Blog
+              News &amp; Updates
             </Link>
             <span>•</span>
             <Link href="/contact" className="hover:text-cyan-300 transition">
