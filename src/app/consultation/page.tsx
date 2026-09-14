@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import Testimonials from '@/components/Testimonials';
+import { addSubmission } from '@/lib/submissions';
 import {
   BookmarkCheck,
   Calendar,
@@ -19,7 +20,6 @@ import {
   CreditCard,
   MessageSquare,
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 export default function ConsultationPage() {
   const [formData, setFormData] = useState({
@@ -38,16 +38,20 @@ export default function ConsultationPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-      });
-    }, 1500);
+    addSubmission('consultation', {
+      name: formData.fullName,
+      phone: formData.phone,
+      email: formData.email,
+      details: {
+        Exam: formData.exam,
+        Stage: formData.stage,
+        Slot: `${formData.preferredDate} · ${formData.preferredTime}`,
+        Fee: '₹199',
+        Brief: formData.brief,
+      },
+    });
+    setIsSubmitting(false);
+    setSubmitted(true);
   };
 
   return (

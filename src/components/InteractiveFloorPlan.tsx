@@ -24,7 +24,7 @@ import {
   ShieldCheck,
   Check
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { addSubmission } from '@/lib/submissions';
 
 export type SeatTier = 'green' | 'yellow' | 'pink';
 
@@ -235,6 +235,8 @@ export default function InteractiveFloorPlan() {
   const [showCheckoutModal, setShowCheckoutModal] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [bookingSuccess, setBookingSuccess] = useState<boolean>(false);
+  // Held in state so the pass number stays put across re-renders.
+  const [passId, setPassId] = useState<string>('');
 
   const todayStr = useMemo(() => new Date().toISOString().split('T')[0], []);
 
@@ -372,13 +374,26 @@ export default function InteractiveFloorPlan() {
 
     setIsSubmitting(true);
     setTimeout(() => {
+      const label = selectedSeat?.label ?? '';
+      const reference = `ANUBHAVV-S${label}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+      addSubmission('seat', {
+        name: formData.fullName.trim(),
+        phone: formData.phone.trim(),
+        email: formData.email.trim(),
+        details: {
+          Seat: `S-${label}`,
+          Tier: selectedSeat ? TIER_INFO[selectedSeat.tier].name : '',
+          Duration: `${selectedDuration} month(s)`,
+          'Start Date': formData.startDate,
+          Amount: `₹${pricing.total.toLocaleString()}`,
+          'Pass ID': reference,
+        },
+      });
+
+      setPassId(reference);
       setIsSubmitting(false);
       setBookingSuccess(true);
-      confetti({
-        particleCount: 120,
-        spread: 80,
-        origin: { y: 0.6 },
-      });
     }, 1000);
   };
 
@@ -1264,7 +1279,7 @@ export default function InteractiveFloorPlan() {
                 <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl max-w-xs mx-auto space-y-2">
                   <QrCode className="w-24 h-24 mx-auto text-slate-800" />
                   <div className="text-xs font-mono font-bold text-slate-700">
-                    PASS ID: ANUBHAVV-S{selectedSeat.label}-{Math.floor(1000 + Math.random() * 9000)}
+                    PASS ID: {passId}
                   </div>
                   <p className="text-xs text-slate-500">
                     A copy of this digital pass has been sent to WhatsApp <strong>+91 {formData.phone}</strong> and <strong>{formData.email}</strong>.

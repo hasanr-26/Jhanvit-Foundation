@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import CareersSection from '@/components/CareersSection';
 import {
   MapPin,
   Phone,
@@ -14,8 +15,8 @@ import {
   CheckCircle,
   MessageSquare,
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 import { useSiteConfig } from '@/lib/siteConfig';
+import { addSubmission } from '@/lib/submissions';
 
 export default function ContactPage() {
   const siteConfig = useSiteConfig();
@@ -32,16 +33,14 @@ export default function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-      });
-    }, 1500);
+    addSubmission('contact', {
+      name: formData.fullName,
+      phone: formData.phone,
+      email: formData.email,
+      details: { Role: formData.role, Message: formData.message },
+    });
+    setIsSubmitting(false);
+    setSubmitted(true);
   };
 
   return (
@@ -252,6 +251,9 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Careers */}
+      <CareersSection />
 
       <Footer />
       <WhatsAppButton />
