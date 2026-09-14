@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
@@ -15,10 +15,10 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { getSiteConfig, SiteConfig, DEFAULT_SITE_CONFIG } from '@/lib/siteConfig';
+import { useSiteConfig } from '@/lib/siteConfig';
 
 export default function ContactPage() {
-  const [siteConfig, setSiteConfig] = useState<SiteConfig>(DEFAULT_SITE_CONFIG);
+  const siteConfig = useSiteConfig();
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
@@ -28,10 +28,6 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-
-  useEffect(() => {
-    setSiteConfig(getSiteConfig());
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

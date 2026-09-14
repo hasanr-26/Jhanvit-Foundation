@@ -1,6 +1,9 @@
 // siteConfig.ts — Single source of truth for all admin-editable site content.
 // Admin changes are persisted in localStorage and read by all frontend pages.
 
+import { createClientStore } from './clientStore';
+import type { IconKey } from './pageContent';
+
 export interface DonationPreset {
   amount: number;
   label: string;
@@ -8,11 +11,18 @@ export interface DonationPreset {
   popular?: boolean;
 }
 
+/** One figure in the band under the homepage hero. Counts up when scrolled into view. */
+export interface HomeStat {
+  id: string;
+  icon: IconKey;
+  value: string;
+  label: string;
+  caption: string;
+}
+
 export interface SiteConfig {
   // Homepage Stats
-  aspirantsSupported: string;
-  studySeatsAvailable: string;
-  yearFounded: string;
+  homeStats: HomeStat[];
 
   // Contact Info
   phone1: string;
@@ -43,9 +53,29 @@ export interface SiteConfig {
 
 export const DEFAULT_SITE_CONFIG: SiteConfig = {
   // Homepage Stats
-  aspirantsSupported: '120+',
-  studySeatsAvailable: '125',
-  yearFounded: '2026',
+  homeStats: [
+    {
+      id: 'stat-aspirants',
+      icon: 'users',
+      value: '120+',
+      label: 'Aspirants Supported',
+      caption: 'UPSC, MPSC & State Exams',
+    },
+    {
+      id: 'stat-children',
+      icon: 'heart',
+      value: '500+',
+      label: 'Children Impacted',
+      caption: 'Through school & outreach work',
+    },
+    {
+      id: 'stat-institutions',
+      icon: 'building',
+      value: '18',
+      label: 'Institutions Supported',
+      caption: 'Schools & study centres, till date',
+    },
+  ],
 
   // Contact Info
   phone1: '7066422555',
@@ -128,7 +158,13 @@ export function saveSiteConfig(config: SiteConfig): void {
   if (typeof window === 'undefined') return;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+    siteConfigStore.notify();
   } catch {
     console.error('Failed to save site config to localStorage');
   }
 }
+
+const siteConfigStore = createClientStore(STORAGE_KEY, getSiteConfig, DEFAULT_SITE_CONFIG);
+
+/** Live site config. Re-renders when the admin saves, here or in another tab. */
+export const useSiteConfig = siteConfigStore.useValue;

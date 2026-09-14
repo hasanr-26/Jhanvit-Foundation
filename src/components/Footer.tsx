@@ -1,17 +1,13 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, HeartHandshake, ArrowUpRight } from 'lucide-react';
-import { getSiteConfig, SiteConfig, DEFAULT_SITE_CONFIG } from '@/lib/siteConfig';
+import { useSiteConfig } from '@/lib/siteConfig';
 
 export default function Footer() {
-  const [config, setConfig] = useState<SiteConfig>(DEFAULT_SITE_CONFIG);
-
-  useEffect(() => {
-    setConfig(getSiteConfig());
-  }, []);
+  const config = useSiteConfig();
 
   return (
     <footer className="bg-[#0f172a] text-slate-300 pt-16 pb-12 border-t-4 border-[#0090b0] relative overflow-hidden">

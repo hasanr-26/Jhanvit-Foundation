@@ -1,22 +1,27 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
-  getSiteConfig,
+  useSiteConfig,
   saveSiteConfig,
   SiteConfig,
   DEFAULT_SITE_CONFIG,
 } from '@/lib/siteConfig';
+import {
+  FieldLabel,
+  TextInput,
+  TextAreaInput,
+  IconPicker,
+  SectionCard,
+} from './fields';
+import type { HomeStat } from '@/lib/siteConfig';
 import {
   BarChart3,
   Phone,
   Building2,
   Heart,
   Landmark,
-  CheckCircle2,
   RefreshCw,
-  Save,
-  Info,
   Clock,
   Mail,
   MapPin,
@@ -29,126 +34,13 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 
-// ─── Reusable field components ────────────────────────────────────────────────
-
-function FieldLabel({ label, hint }: { label: string; hint?: string }) {
-  return (
-    <div className="mb-1">
-      <label className="block text-xs font-semibold text-slate-400">{label}</label>
-      {hint && <p className="text-xs text-slate-600 mt-0.5">{hint}</p>}
-    </div>
-  );
-}
-
-function TextInput({
-  value,
-  onChange,
-  placeholder,
-  mono,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-  mono?: boolean;
-}) {
-  return (
-    <input
-      type="text"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
-      className={`w-full px-3 py-2.5 rounded-xl border border-white/10 bg-white/5 text-white text-xs placeholder-slate-600 focus:ring-2 focus:ring-[#0090b0] focus:outline-none focus:bg-white/8 transition ${mono ? 'font-mono' : ''}`}
-    />
-  );
-}
-
-function TextAreaInput({
-  value,
-  onChange,
-  placeholder,
-  rows = 2,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-  rows?: number;
-}) {
-  return (
-    <textarea
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
-      rows={rows}
-      className="w-full px-3 py-2.5 rounded-xl border border-white/10 bg-white/5 text-white text-xs placeholder-slate-600 focus:ring-2 focus:ring-[#0090b0] focus:outline-none focus:bg-white/8 transition resize-none"
-    />
-  );
-}
-
-function SectionCard({
-  icon,
-  title,
-  color,
-  children,
-  onSave,
-  savedSection,
-  sectionKey,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  color: string;
-  children: React.ReactNode;
-  onSave: () => void;
-  savedSection: string | null;
-  sectionKey: string;
-}) {
-  const isSaved = savedSection === sectionKey;
-  return (
-    <div className="bg-[#0d1420] rounded-2xl border border-white/5 overflow-hidden">
-      <div className={`px-5 py-3.5 flex items-center gap-3 border-b border-white/5 ${color}`}>
-        <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-          {icon}
-        </div>
-        <h3 className="font-bold text-sm text-white">{title}</h3>
-      </div>
-      <div className="p-5 space-y-4">
-        {children}
-        <div className="pt-2 flex items-center justify-between gap-3 border-t border-white/5">
-          <p className="text-xs text-slate-500 flex items-center gap-1">
-            <Info className="w-3 h-3" /> Changes go live immediately on the website.
-          </p>
-          <button
-            onClick={onSave}
-            className={`flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl shadow transition ${
-              isSaved
-                ? 'bg-emerald-500 text-white'
-                : 'bg-[#0090b0] hover:bg-[#007894] text-white'
-            }`}
-          >
-            {isSaved ? (
-              <>
-                <CheckCircle2 className="w-3.5 h-3.5" /> Saved!
-              </>
-            ) : (
-              <>
-                <Save className="w-3.5 h-3.5" /> Save Changes
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function SiteContentEditor() {
-  const [config, setConfig] = useState<SiteConfig>(DEFAULT_SITE_CONFIG);
+  // Local draft. Seeded from the live store, written back on Save.
+  const stored = useSiteConfig();
+  const [config, setConfig] = useState<SiteConfig>(stored);
   const [savedSection, setSavedSection] = useState<string | null>(null);
-
-  useEffect(() => {
-    setConfig(getSiteConfig());
-  }, []);
 
   const update = (fields: Partial<SiteConfig>) => {
     setConfig((prev) => ({ ...prev, ...fields }));
@@ -171,6 +63,12 @@ export default function SiteContentEditor() {
       setSavedSection('reset');
       setTimeout(() => setSavedSection(null), 2500);
     }
+  };
+
+  const updateStat = (index: number, fields: Partial<HomeStat>) => {
+    const stats = [...config.homeStats];
+    stats[index] = { ...stats[index], ...fields };
+    update({ homeStats: stats });
   };
 
   const updatePreset = (index: number, field: string, value: string | number | boolean) => {
@@ -206,31 +104,46 @@ export default function SiteContentEditor() {
         onSave={() => handleSave('stats')}
         savedSection={savedSection}
       >
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <FieldLabel label="Aspirants Supported" hint='Shown as "120+" on the homepage banner' />
-            <TextInput
-              value={config.aspirantsSupported}
-              onChange={(v) => update({ aspirantsSupported: v })}
-              placeholder="e.g. 120+"
-            />
-          </div>
-          <div>
-            <FieldLabel label="Study Seats Available" hint="Total seat count shown on homepage" />
-            <TextInput
-              value={config.studySeatsAvailable}
-              onChange={(v) => update({ studySeatsAvailable: v })}
-              placeholder="e.g. 125"
-            />
-          </div>
-          <div>
-            <FieldLabel label="Year Founded" hint="Year shown in the homepage stat bar" />
-            <TextInput
-              value={config.yearFounded}
-              onChange={(v) => update({ yearFounded: v })}
-              placeholder="e.g. 2026"
-            />
-          </div>
+        <p className="text-xs text-slate-500">
+          Each figure rolls up from zero when a visitor scrolls to it. Any digits you type are
+          counted, so &quot;120+&quot; counts to 120 and keeps the plus sign.
+        </p>
+        <div className="space-y-3">
+          {config.homeStats.map((stat, i) => (
+            <div
+              key={stat.id}
+              className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end bg-white/[0.02] border border-white/5 rounded-xl p-3"
+            >
+              <div className="sm:col-span-2">
+                <FieldLabel label="Icon" />
+                <IconPicker value={stat.icon} onChange={(v) => updateStat(i, { icon: v })} />
+              </div>
+              <div className="sm:col-span-2">
+                <FieldLabel label="Number" />
+                <TextInput
+                  value={stat.value}
+                  onChange={(v) => updateStat(i, { value: v })}
+                  placeholder="e.g. 120+"
+                />
+              </div>
+              <div className="sm:col-span-4">
+                <FieldLabel label="Label" />
+                <TextInput
+                  value={stat.label}
+                  onChange={(v) => updateStat(i, { label: v })}
+                  placeholder="e.g. Aspirants Supported"
+                />
+              </div>
+              <div className="sm:col-span-4">
+                <FieldLabel label="Small caption" />
+                <TextInput
+                  value={stat.caption}
+                  onChange={(v) => updateStat(i, { caption: v })}
+                  placeholder="e.g. UPSC, MPSC & State Exams"
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </SectionCard>
 
@@ -401,7 +314,7 @@ export default function SiteContentEditor() {
       >
         <p className="text-xs text-slate-400 bg-amber-900/20 border border-amber-800/40 rounded-xl px-3 py-2 flex gap-2 items-start">
           <AlertTriangle className="w-3.5 h-3.5 text-amber-500 flex-shrink-0 mt-0.5" />
-          These 4 tiers appear as clickable cards on the Donate page. The "Popular" badge is shown on the tier you mark as popular.
+          These 4 tiers appear as clickable cards on the Donate page. The &quot;Popular&quot; badge is shown on the tier you mark as popular.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {config.donationPresets.map((preset, i) => (

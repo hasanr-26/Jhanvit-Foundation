@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
@@ -11,14 +11,10 @@ import {
   FileCheck2,
   ArrowRight,
 } from 'lucide-react';
-import { getSiteConfig, SiteConfig, DEFAULT_SITE_CONFIG } from '@/lib/siteConfig';
+import { useSiteConfig } from '@/lib/siteConfig';
 
 export default function AboutPage() {
-  const [config, setConfig] = useState<SiteConfig>(DEFAULT_SITE_CONFIG);
-
-  useEffect(() => {
-    setConfig(getSiteConfig());
-  }, []);
+  const config = useSiteConfig();
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">

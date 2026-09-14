@@ -4,6 +4,8 @@
 // logos, social handles and career openings. All of it is edited from /admin
 // and persisted in localStorage, same pattern as siteConfig and blogData.
 
+import { createClientStore } from './clientStore';
+
 /** Icon keys resolved through ICON_MAP in components. Keep in sync with iconMap.ts */
 export type IconKey =
   | 'alert'
@@ -444,6 +446,7 @@ export function savePageContent(content: PageContent): void {
   if (typeof window === 'undefined') return;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
+    pageContentStore.notify();
   } catch (err) {
     console.error('Error saving page content:', err);
   }
@@ -452,7 +455,13 @@ export function savePageContent(content: PageContent): void {
 export function resetPageContent(): void {
   if (typeof window === 'undefined') return;
   localStorage.removeItem(STORAGE_KEY);
+  pageContentStore.notify();
 }
+
+const pageContentStore = createClientStore(STORAGE_KEY, getPageContent, DEFAULT_PAGE_CONTENT);
+
+/** Live page content. Re-renders when the admin saves, here or in another tab. */
+export const usePageContent = pageContentStore.useValue;
 
 /** Download the editable content as a JSON backup file. */
 export function exportPageContent(): void {
